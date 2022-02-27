@@ -20,9 +20,17 @@ from poetassistant.apps.definitions.models.dictionary import Dictionary
 
 
 class DictionarySerializer(serializers.HyperlinkedModelSerializer):
+    part_of_speech = serializers.SerializerMethodField()
+
+    @staticmethod
+    def get_part_of_speech(obj):
+        return {
+            'a': 'adjective',
+            'r': 'adverb',
+            'n': 'noun',
+            'v': 'verb',
+        }[obj.part_of_speech]
+
     class Meta:
         model = Dictionary
-        fields = ['part-of-speech', 'word', 'definition']
-        extra_kwargs = {
-            'part-of-speech': {'source': 'part_of_speech'}
-        }
+        fields = ['part_of_speech', 'definition']

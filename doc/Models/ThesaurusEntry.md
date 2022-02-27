@@ -3,8 +3,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**part-of-speech** | **String** |  | [default to null]
-**word** | **String** |  | [default to null]
+**part\_of\_speech** | **String** |  | [optional] [default to null]
 **synonyms** | **List** |  | [default to null]
 **antonyms** | **List** |  | [default to null]
 

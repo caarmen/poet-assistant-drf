@@ -30,10 +30,17 @@ class CsvListField(serializers.ListField):
 class ThesaurusEntrySerializer(serializers.HyperlinkedModelSerializer):
     synonyms = CsvListField(child=serializers.CharField())
     antonyms = CsvListField(child=serializers.CharField())
+    part_of_speech = serializers.SerializerMethodField(source="word_type")
+
+    @staticmethod
+    def get_part_of_speech(obj):
+        return {
+            'ADJ': 'adjective',
+            'ADV': 'adverb',
+            'NOUN': 'noun',
+            'VERB': 'verb',
+        }[obj.word_type]
 
     class Meta:
         model = ThesaurusEntry
-        fields = ['part-of-speech', 'word', 'synonyms', 'antonyms']
-        extra_kwargs = {
-            'part-of-speech': {'source': 'word_type'}
-        }
+        fields = ['part_of_speech', 'synonyms', 'antonyms']

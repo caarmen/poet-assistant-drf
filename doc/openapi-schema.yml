@@ -148,27 +148,19 @@ components:
     Dictionary:
       type: object
       properties:
-        part-of-speech:
+        part_of_speech:
           type: string
-          maxLength: 1
-        word:
-          type: string
-          maxLength: 128
+          readOnly: true
         definition:
           type: string
       required:
-      - part-of-speech
-      - word
       - definition
     ThesaurusEntry:
       type: object
       properties:
-        part-of-speech:
+        part_of_speech:
           type: string
-          maxLength: 4
-        word:
-          type: string
-          maxLength: 128
+          readOnly: true
         synonyms:
           type: array
           items:
@@ -178,7 +170,5 @@ components:
           items:
             type: string
       required:
-      - part-of-speech
-      - word
       - synonyms
       - antonyms
