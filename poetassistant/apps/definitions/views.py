@@ -14,7 +14,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
-from django.shortcuts import render
 from rest_framework import filters, viewsets
 
 from poetassistant.apps.definitions.models.dictionary import Dictionary
