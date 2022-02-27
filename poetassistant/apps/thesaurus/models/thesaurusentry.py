@@ -14,18 +14,20 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
-from rest_framework import filters, viewsets
+from django.db import models
 
-from poetassistant.apps.thesaurus.models.thesaurusentry import ThesaurusEntry
-from poetassistant.apps.thesaurus.serializers import ThesaurusEntrySerializer
-
-
-class WordSearchFilter(filters.SearchFilter):
-    search_param = "word"
+from poetassistant.apps.thesaurus import apps
 
 
-class ThesaurusEntrySet(viewsets.ReadOnlyModelViewSet):
-    queryset = ThesaurusEntry.objects.using('poet_assistant').all().order_by('word', 'word_type')
-    serializer_class = ThesaurusEntrySerializer
-    filter_backends = [WordSearchFilter]
-    search_fields = ['=word']
+class ThesaurusEntry(models.Model):
+    rowid = models.IntegerField(primary_key=True)
+    word = models.CharField(max_length=128)
+    word_type = models.CharField(max_length=4)
+    synonyms = models.CharField(max_length=2860)
+    antonyms = models.CharField(max_length=128)
+
+    objects = models.Manager()
+
+    class Meta:
+        db_table = 'thesaurus'
+        app_label = apps.ThesaurusConfig.name

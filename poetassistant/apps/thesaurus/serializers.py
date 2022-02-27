@@ -14,18 +14,26 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
-from rest_framework import filters, viewsets
+
+from rest_framework import serializers
 
 from poetassistant.apps.thesaurus.models.thesaurusentry import ThesaurusEntry
-from poetassistant.apps.thesaurus.serializers import ThesaurusEntrySerializer
 
 
-class WordSearchFilter(filters.SearchFilter):
-    search_param = "word"
+class CsvListField(serializers.ListField):
+
+    def get_attribute(self, instance):
+        result = super().get_attribute(instance)
+        return [x for x in result.split(',') if x]
 
 
-class ThesaurusEntrySet(viewsets.ReadOnlyModelViewSet):
-    queryset = ThesaurusEntry.objects.using('poet_assistant').all().order_by('word', 'word_type')
-    serializer_class = ThesaurusEntrySerializer
-    filter_backends = [WordSearchFilter]
-    search_fields = ['=word']
+class ThesaurusEntrySerializer(serializers.HyperlinkedModelSerializer):
+    synonyms = CsvListField(child=serializers.CharField())
+    antonyms = CsvListField(child=serializers.CharField())
+
+    class Meta:
+        model = ThesaurusEntry
+        fields = ['part-of-speech', 'word', 'synonyms', 'antonyms']
+        extra_kwargs = {
+            'part-of-speech': {'source': 'word_type'}
+        }
