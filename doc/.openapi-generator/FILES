@@ -1,5 +1,7 @@
-.openapi-generator-ignore
 Apis/DefinitionsApi.md
+Apis/ThesaurusApi.md
 Models/Dictionary.md
+Models/ThesaurusEntry.md
 Models/inline_response_200.md
+Models/inline_response_200_1.md
 README.md
