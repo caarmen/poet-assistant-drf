@@ -1,0 +1,5 @@
+.openapi-generator-ignore
+Apis/DefinitionsApi.md
+Models/Dictionary.md
+Models/inline_response_200.md
+README.md
