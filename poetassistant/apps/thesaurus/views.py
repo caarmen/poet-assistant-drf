@@ -14,7 +14,9 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
-from rest_framework import filters, viewsets
+from rest_framework import filters
+from rest_framework.mixins import ListModelMixin
+from rest_framework.viewsets import GenericViewSet
 
 from poetassistant.apps.thesaurus.models.thesaurusentry import ThesaurusEntry
 from poetassistant.apps.thesaurus.serializers import ThesaurusEntrySerializer
@@ -24,7 +26,8 @@ class WordSearchFilter(filters.SearchFilter):
     search_param = "word"
 
 
-class ThesaurusEntrySet(viewsets.ReadOnlyModelViewSet):
+class ThesaurusEntrySet(ListModelMixin,
+                        GenericViewSet):
     queryset = ThesaurusEntry.objects.using('poet_assistant').all().order_by('word', 'word_type')
     serializer_class = ThesaurusEntrySerializer
     filter_backends = [WordSearchFilter]

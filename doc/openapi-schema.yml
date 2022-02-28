@@ -47,32 +47,6 @@ paths:
           description: ''
       tags:
       - definitions
-  /definitions/{rowid}/:
-    get:
-      operationId: retrieveDictionary
-      description: ''
-      parameters:
-      - name: rowid
-        in: path
-        required: true
-        description: A unique value identifying this dictionary.
-        schema:
-          type: string
-      - name: word
-        required: false
-        in: query
-        description: A search term.
-        schema:
-          type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Dictionary'
-          description: ''
-      tags:
-      - definitions
   /thesaurus/:
     get:
       operationId: listThesaurusEntrys
@@ -114,32 +88,6 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/ThesaurusEntry'
-          description: ''
-      tags:
-      - thesaurus
-  /thesaurus/{rowid}/:
-    get:
-      operationId: retrieveThesaurusEntry
-      description: ''
-      parameters:
-      - name: rowid
-        in: path
-        required: true
-        description: A unique value identifying this thesaurus entry.
-        schema:
-          type: string
-      - name: word
-        required: false
-        in: query
-        description: A search term.
-        schema:
-          type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThesaurusEntry'
           description: ''
       tags:
       - thesaurus

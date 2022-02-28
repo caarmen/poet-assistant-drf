@@ -8,9 +8,7 @@ All URIs are relative to *http://localhost*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *DefinitionsApi* | [**listDictionarys**](Apis/DefinitionsApi.md#listdictionarys) | **GET** /definitions/ | 
-*DefinitionsApi* | [**retrieveDictionary**](Apis/DefinitionsApi.md#retrievedictionary) | **GET** /definitions/{rowid}/ | 
 *ThesaurusApi* | [**listThesaurusEntrys**](Apis/ThesaurusApi.md#listthesaurusentrys) | **GET** /thesaurus/ | 
-*ThesaurusApi* | [**retrieveThesaurusEntry**](Apis/ThesaurusApi.md#retrievethesaurusentry) | **GET** /thesaurus/{rowid}/ | 
 
 
 <a name="documentation-for-models"></a>
