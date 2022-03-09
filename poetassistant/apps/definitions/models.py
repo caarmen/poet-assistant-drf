@@ -16,6 +16,7 @@
 # along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
 from django.db import models
 
+from poetassistant.apps.commonapi.partofspeech import PartOfSpeech
 from poetassistant.apps.definitions import apps
 
 
@@ -26,6 +27,14 @@ class Dictionary(models.Model):
     definition = models.TextField()
 
     objects = models.Manager()
+
+    def part_of_speech_enum(self):
+        return {
+            'a': PartOfSpeech.ADJECTIVE,
+            'r': PartOfSpeech.ADVERB,
+            'n': PartOfSpeech.NOUN,
+            'v': PartOfSpeech.VERB
+        }[self.part_of_speech]
 
     class Meta:
         db_table = 'dictionary'

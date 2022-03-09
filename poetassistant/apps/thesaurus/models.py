@@ -16,6 +16,7 @@
 # along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
 from django.db import models
 
+from poetassistant.apps.commonapi.partofspeech import PartOfSpeech
 from poetassistant.apps.thesaurus import apps
 
 
@@ -27,6 +28,14 @@ class ThesaurusEntry(models.Model):
     antonyms = models.CharField(max_length=128)
 
     objects = models.Manager()
+
+    def part_of_speech_enum(self):
+        return {
+            'ADJ': PartOfSpeech.ADJECTIVE,
+            'ADV': PartOfSpeech.ADVERB,
+            'NOUN': PartOfSpeech.NOUN,
+            'VERB': PartOfSpeech.VERB
+        }[self.word_type]
 
     class Meta:
         db_table = 'thesaurus'

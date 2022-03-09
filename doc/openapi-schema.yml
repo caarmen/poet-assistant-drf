@@ -155,6 +155,12 @@ components:
       type: object
       properties:
         part_of_speech:
+          enum:
+          - noun
+          - verb
+          - adjective
+          - adverb
+          - unknown
           type: string
           readOnly: true
         synonyms:
@@ -172,6 +178,12 @@ components:
       type: object
       properties:
         part_of_speech:
+          enum:
+          - noun
+          - verb
+          - adjective
+          - adverb
+          - unknown
           type: string
           readOnly: true
         definition:

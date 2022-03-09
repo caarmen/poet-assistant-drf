@@ -31,16 +31,8 @@ class CsvListField(serializers.ListField):
 class ThesaurusEntrySerializer(serializers.HyperlinkedModelSerializer):
     synonyms = CsvListField(child=serializers.CharField())
     antonyms = CsvListField(child=serializers.CharField())
-    part_of_speech = serializers.SerializerMethodField()
-
-    @staticmethod
-    def get_part_of_speech(obj):
-        return {
-            'ADJ': PartOfSpeech.ADJECTIVE,
-            'ADV': PartOfSpeech.ADVERB,
-            'NOUN': PartOfSpeech.NOUN,
-            'VERB': PartOfSpeech.VERB
-        }[obj.word_type]
+    part_of_speech = serializers.ChoiceField(choices=[e.value for e in PartOfSpeech], read_only=True,
+                                             source='part_of_speech_enum')
 
     class Meta:
         model = ThesaurusEntry

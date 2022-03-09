@@ -21,16 +21,8 @@ from poetassistant.apps.definitions.models import Dictionary
 
 
 class DictionarySerializer(serializers.HyperlinkedModelSerializer):
-    part_of_speech = serializers.SerializerMethodField()
-
-    @staticmethod
-    def get_part_of_speech(obj):
-        return {
-            'a': PartOfSpeech.ADJECTIVE,
-            'r': PartOfSpeech.ADVERB,
-            'n': PartOfSpeech.NOUN,
-            'v': PartOfSpeech.VERB
-        }[obj.part_of_speech]
+    part_of_speech = serializers.ChoiceField(choices=[e.value for e in PartOfSpeech], read_only=True,
+                                             source='part_of_speech_enum')
 
     class Meta:
         model = Dictionary
