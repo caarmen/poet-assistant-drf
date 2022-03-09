@@ -16,6 +16,7 @@
 # along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
 from rest_framework import serializers
 
+from poetassistant.apps.commonapi.partofspeech import PartOfSpeech
 from poetassistant.apps.definitions.models.dictionary import Dictionary
 
 
@@ -25,10 +26,10 @@ class DictionarySerializer(serializers.HyperlinkedModelSerializer):
     @staticmethod
     def get_part_of_speech(obj):
         return {
-            'a': 'adjective',
-            'r': 'adverb',
-            'n': 'noun',
-            'v': 'verb',
+            'a': PartOfSpeech.ADJECTIVE.value,
+            'r': PartOfSpeech.ADVERB.value,
+            'n': PartOfSpeech.NOUN.value,
+            'v': PartOfSpeech.VERB.value
         }[obj.part_of_speech]
 
     class Meta:
