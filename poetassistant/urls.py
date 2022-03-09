@@ -33,11 +33,13 @@ from django.urls import path, include
 from rest_framework import routers
 
 from poetassistant.apps.definitions.views import DefinitionSet
+from poetassistant.apps.rhymes.views import RhymeSet
 from poetassistant.apps.thesaurus.views import ThesaurusEntrySet
 
 router = routers.DefaultRouter()
-router.register(r'definitions', DefinitionSet, "definitions")
+router.register(r'rhymes', RhymeSet, "rhymes")
 router.register(r'thesaurus', ThesaurusEntrySet, "thesaurus")
+router.register(r'definitions', DefinitionSet, "definitions")
 
 urlpatterns = [
     path('', include(router.urls)),
