@@ -36,6 +36,7 @@ from rest_framework.schemas import get_schema_view
 from poetassistant.apps.definitions.views import DefinitionSet
 from poetassistant.apps.rhymes.views import RhymeSet
 from poetassistant.apps.thesaurus.views import ThesaurusEntrySet
+from poetassistant.apps.wotd.views import WotdSet
 
 schema_view = get_schema_view(title="Poet Assistant API")
 
@@ -43,8 +44,9 @@ router = routers.DefaultRouter()
 router.register(r'rhymes', RhymeSet, "rhymes")
 router.register(r'thesaurus', ThesaurusEntrySet, "thesaurus")
 router.register(r'definitions', DefinitionSet, "definitions")
+router.register(r'wotd', WotdSet, "wotd")
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('schema', schema_view)
+    path('schema', schema_view),
 ]
