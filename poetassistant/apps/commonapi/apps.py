@@ -17,6 +17,6 @@
 from django.apps import AppConfig
 
 
-class DbConfig(AppConfig):
+class CommonApiConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'poetassistant.apps.db'
+    name = 'poetassistant.apps.commonapi'

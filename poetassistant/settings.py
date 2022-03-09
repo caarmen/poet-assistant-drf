@@ -55,6 +55,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_filters',
     'rest_framework',
+    'poetassistant.apps.commonapi.apps.CommonApiConfig',
+    'poetassistant.apps.db.apps.DbConfig',
+    'poetassistant.apps.definitions.apps.DefinitionsConfig',
+    'poetassistant.apps.thesaurus.apps.ThesaurusConfig',
 ]
 
 MIDDLEWARE = [

@@ -19,4 +19,4 @@ from django.apps import AppConfig
 
 class ThesaurusConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'thesaurus'
+    name = 'poetassistant.apps.thesaurus'
