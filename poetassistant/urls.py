@@ -31,10 +31,13 @@ Including another URLconf
 """
 from django.urls import path, include
 from rest_framework import routers
+from rest_framework.schemas import get_schema_view
 
 from poetassistant.apps.definitions.views import DefinitionSet
 from poetassistant.apps.rhymes.views import RhymeSet
 from poetassistant.apps.thesaurus.views import ThesaurusEntrySet
+
+schema_view = get_schema_view(title="Poet Assistant API")
 
 router = routers.DefaultRouter()
 router.register(r'rhymes', RhymeSet, "rhymes")
@@ -43,4 +46,5 @@ router.register(r'definitions', DefinitionSet, "definitions")
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('schema', schema_view)
 ]
