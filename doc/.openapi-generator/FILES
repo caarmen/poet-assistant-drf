@@ -1,7 +1,10 @@
 Apis/DefinitionsApi.md
+Apis/RhymesApi.md
 Apis/ThesaurusApi.md
 Models/Dictionary.md
+Models/Rhymes.md
 Models/ThesaurusEntry.md
 Models/inline_response_200.md
 Models/inline_response_200_1.md
+Models/inline_response_200_2.md
 README.md
