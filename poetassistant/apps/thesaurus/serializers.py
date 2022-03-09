@@ -17,6 +17,7 @@
 
 from rest_framework import serializers
 
+from poetassistant.apps.commonapi.partofspeech import PartOfSpeech
 from poetassistant.apps.thesaurus.models.thesaurusentry import ThesaurusEntry
 
 
@@ -35,10 +36,10 @@ class ThesaurusEntrySerializer(serializers.HyperlinkedModelSerializer):
     @staticmethod
     def get_part_of_speech(obj):
         return {
-            'ADJ': 'adjective',
-            'ADV': 'adverb',
-            'NOUN': 'noun',
-            'VERB': 'verb',
+            'ADJ': PartOfSpeech.ADJECTIVE.value,
+            'ADV': PartOfSpeech.ADVERB.value,
+            'NOUN': PartOfSpeech.NOUN.value,
+            'VERB': PartOfSpeech.VERB.value
         }[obj.word_type]
 
     class Meta:
