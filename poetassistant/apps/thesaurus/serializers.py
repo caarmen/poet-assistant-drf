@@ -36,10 +36,10 @@ class ThesaurusEntrySerializer(serializers.HyperlinkedModelSerializer):
     @staticmethod
     def get_part_of_speech(obj):
         return {
-            'ADJ': PartOfSpeech.ADJECTIVE.value,
-            'ADV': PartOfSpeech.ADVERB.value,
-            'NOUN': PartOfSpeech.NOUN.value,
-            'VERB': PartOfSpeech.VERB.value
+            'ADJ': PartOfSpeech.ADJECTIVE,
+            'ADV': PartOfSpeech.ADVERB,
+            'NOUN': PartOfSpeech.NOUN,
+            'VERB': PartOfSpeech.VERB
         }[obj.word_type]
 
     class Meta:

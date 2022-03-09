@@ -26,10 +26,10 @@ class DictionarySerializer(serializers.HyperlinkedModelSerializer):
     @staticmethod
     def get_part_of_speech(obj):
         return {
-            'a': PartOfSpeech.ADJECTIVE.value,
-            'r': PartOfSpeech.ADVERB.value,
-            'n': PartOfSpeech.NOUN.value,
-            'v': PartOfSpeech.VERB.value
+            'a': PartOfSpeech.ADJECTIVE,
+            'r': PartOfSpeech.ADVERB,
+            'n': PartOfSpeech.NOUN,
+            'v': PartOfSpeech.VERB
         }[obj.part_of_speech]
 
     class Meta:
