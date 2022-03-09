@@ -18,7 +18,7 @@
 from rest_framework import serializers
 
 from poetassistant.apps.commonapi.partofspeech import PartOfSpeech
-from poetassistant.apps.thesaurus.models.thesaurusentry import ThesaurusEntry
+from poetassistant.apps.thesaurus.models import ThesaurusEntry
 
 
 class CsvListField(serializers.ListField):

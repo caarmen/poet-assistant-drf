@@ -18,7 +18,7 @@ from rest_framework import filters
 from rest_framework.mixins import ListModelMixin
 from rest_framework.viewsets import GenericViewSet
 
-from poetassistant.apps.thesaurus.models.thesaurusentry import ThesaurusEntry
+from poetassistant.apps.thesaurus.models import ThesaurusEntry
 from poetassistant.apps.thesaurus.serializers import ThesaurusEntrySerializer
 
 

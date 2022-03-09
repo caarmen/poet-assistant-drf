@@ -17,7 +17,7 @@
 from rest_framework import serializers
 
 from poetassistant.apps.commonapi.partofspeech import PartOfSpeech
-from poetassistant.apps.definitions.models.dictionary import Dictionary
+from poetassistant.apps.definitions.models import Dictionary
 
 
 class DictionarySerializer(serializers.HyperlinkedModelSerializer):

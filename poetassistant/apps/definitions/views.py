@@ -18,7 +18,7 @@ from rest_framework import filters
 from rest_framework.mixins import ListModelMixin
 from rest_framework.viewsets import GenericViewSet
 
-from poetassistant.apps.definitions.models.dictionary import Dictionary
+from poetassistant.apps.definitions.models import Dictionary
 from poetassistant.apps.definitions.serializers import DictionarySerializer
 
 
