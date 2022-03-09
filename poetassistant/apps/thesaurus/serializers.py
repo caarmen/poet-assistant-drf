@@ -31,7 +31,7 @@ class CsvListField(serializers.ListField):
 class ThesaurusEntrySerializer(serializers.HyperlinkedModelSerializer):
     synonyms = CsvListField(child=serializers.CharField())
     antonyms = CsvListField(child=serializers.CharField())
-    part_of_speech = serializers.SerializerMethodField(source="word_type")
+    part_of_speech = serializers.SerializerMethodField()
 
     @staticmethod
     def get_part_of_speech(obj):
