@@ -3,9 +3,9 @@ info:
   title: ''
   version: ''
 paths:
-  /definitions/:
+  /rhymes/:
     get:
-      operationId: listDictionarys
+      operationId: listRhymes
       description: ''
       parameters:
       - name: page
@@ -43,10 +43,10 @@ paths:
                   results:
                     type: array
                     items:
-                      $ref: '#/components/schemas/Dictionary'
+                      $ref: '#/components/schemas/Rhymes'
           description: ''
       tags:
-      - definitions
+      - rhymes
   /thesaurus/:
     get:
       operationId: listThesaurusEntrys
@@ -91,18 +91,66 @@ paths:
           description: ''
       tags:
       - thesaurus
+  /definitions/:
+    get:
+      operationId: listDictionarys
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: word
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?page=4
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?page=2
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Dictionary'
+          description: ''
+      tags:
+      - definitions
 components:
   schemas:
-    Dictionary:
+    Rhymes:
       type: object
       properties:
-        part_of_speech:
+        syllables_type:
           type: string
           readOnly: true
-        definition:
+        syllables:
           type: string
+          readOnly: true
+        word:
+          type: string
+          maxLength: 34
       required:
-      - definition
+      - word
     ThesaurusEntry:
       type: object
       properties:
@@ -120,3 +168,13 @@ components:
       required:
       - synonyms
       - antonyms
+    Dictionary:
+      type: object
+      properties:
+        part_of_speech:
+          type: string
+          readOnly: true
+        definition:
+          type: string
+      required:
+      - definition

@@ -1,15 +1,15 @@
-# DefinitionsApi
+# RhymesApi
 
 All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**listDictionarys**](DefinitionsApi.md#listDictionarys) | **GET** /definitions/ | 
+[**listRhymes**](RhymesApi.md#listRhymes) | **GET** /rhymes/ | 
 
 
-<a name="listDictionarys"></a>
-# **listDictionarys**
-> inline_response_200_2 listDictionarys(page, word)
+<a name="listRhymes"></a>
+# **listRhymes**
+> inline_response_200 listRhymes(page, word)
 
 
 
@@ -22,7 +22,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**inline_response_200_2**](../Models/inline_response_200_2.md)
+[**inline_response_200**](../Models/inline_response_200.md)
 
 ### Authorization
 
