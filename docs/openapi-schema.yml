@@ -136,6 +136,34 @@ paths:
           description: ''
       tags:
       - definitions
+  /wotd/:
+    get:
+      operationId: listWotds
+      description: Return the word(s) of the day.
+      parameters:
+      - name: size
+        required: false
+        in: query
+        description: The number of words of the day
+        schema:
+          type: int
+      - name: before
+        required: false
+        in: query
+        description: Return words of the day prior to and including this date
+        schema:
+          type: date
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Wotd'
+          description: ''
+      tags:
+      - wotd
 components:
   schemas:
     Rhymes:
@@ -191,3 +219,14 @@ components:
           type: string
       required:
       - definition
+    Wotd:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+        word:
+          type: string
+      required:
+      - date
+      - word

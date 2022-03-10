@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'poetassistant.apps.definitions.apps.DefinitionsConfig',
     'poetassistant.apps.thesaurus.apps.ThesaurusConfig',
     'poetassistant.apps.rhymes.apps.RhymesConfig',
+    'poetassistant.apps.wotd.apps.WotdConfig',
 ]
 
 MIDDLEWARE = [

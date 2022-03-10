@@ -982,6 +982,19 @@ ul.nav-tabs {
     }
   }
 };
+    defs["Wotd"] = {
+  "required" : [ "date", "word" ],
+  "type" : "object",
+  "properties" : {
+    "date" : {
+      "type" : "string",
+      "format" : "date"
+    },
+    "word" : {
+      "type" : "string"
+    }
+  }
+};
 
     var errs = {};
   </script>
@@ -1011,6 +1024,10 @@ ul.nav-tabs {
                   <li class="nav-header" data-group="Thesaurus"><a href="#api-Thesaurus">API Methods - Thesaurus</a></li>
                     <li data-group="Thesaurus" data-name="listThesaurusEntrys" class="">
                       <a href="#api-Thesaurus-listThesaurusEntrys">listThesaurusEntrys</a>
+                    </li>
+                  <li class="nav-header" data-group="Wotd"><a href="#api-Wotd">API Methods - Wotd</a></li>
+                    <li data-group="Wotd" data-name="listWotds" class="">
+                      <a href="#api-Wotd-listWotds">listWotds</a>
                     </li>
           </ul>
         </nav>
@@ -2134,6 +2151,378 @@ A search term.
                                     </script>
                                   </div>
                                   <input id='responses-Thesaurus-listThesaurusEntrys-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                        </article>
+                      </div>
+                      <hr>
+                  </section>
+                <section id="api-Wotd">
+                  <h1>Wotd</h1>
+                    <div id="api-Wotd-listWotds">
+                      <article id="api-Wotd-listWotds-0" data-group="User" data-name="listWotds" data-version="0">
+                        <div class="pull-left">
+                          <h1>listWotds</h1>
+                          <p></p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked">Return the word(s) of the day.</p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/wotd/</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Wotd-listWotds-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Wotd-listWotds-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Wotd-listWotds-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Wotd-listWotds-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Wotd-listWotds-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Wotd-listWotds-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Wotd-listWotds-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Wotd-listWotds-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Wotd-listWotds-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Wotd-listWotds-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Wotd-listWotds-0-python">Python</a></li>
+                          <li class=""><a href="#examples-Wotd-listWotds-0-rust">Rust</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Wotd-listWotds-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X GET \
+ -H "Accept: application/json" \
+ "http://localhost/wotd/?size=&before="
+</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Wotd-listWotds-0-java">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
+import org.openapitools.client.auth.*;
+import org.openapitools.client.model.*;
+import org.openapitools.client.api.WotdApi;
+
+import java.io.File;
+import java.util.*;
+
+public class WotdApiExample {
+    public static void main(String[] args) {
+
+        // Create an instance of the API class
+        WotdApi apiInstance = new WotdApi();
+        Integer size = ; // Integer | The number of words of the day
+        date before = ; // date | Return words of the day prior to and including this date
+
+        try {
+            array[Wotd] result = apiInstance.listWotds(size, before);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling WotdApi#listWotds");
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Wotd-listWotds-0-android">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.api.WotdApi;
+
+public class WotdApiExample {
+    public static void main(String[] args) {
+        WotdApi apiInstance = new WotdApi();
+        Integer size = ; // Integer | The number of words of the day
+        date before = ; // date | Return words of the day prior to and including this date
+
+        try {
+            array[Wotd] result = apiInstance.listWotds(size, before);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling WotdApi#listWotds");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Wotd-listWotds-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Wotd-listWotds-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">
+
+// Create an instance of the API class
+WotdApi *apiInstance = [[WotdApi alloc] init];
+Integer *size = ; // The number of words of the day (optional) (default to null)
+date *before = ; // Return words of the day prior to and including this date (optional) (default to null)
+
+[apiInstance listWotdsWith:size
+    before:before
+              completionHandler: ^(array[Wotd] output, NSError* error) {
+    if (output) {
+        NSLog(@"%@", output);
+    }
+    if (error) {
+        NSLog(@"Error: %@", error);
+    }
+}];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Wotd-listWotds-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var PoetAssistantRestApi = require('poet_assistant_rest_api');
+
+// Create an instance of the API class
+var api = new PoetAssistantRestApi.WotdApi()
+var opts = {
+  'size': , // {Integer} The number of words of the day
+  'before':  // {date} Return words of the day prior to and including this date
+};
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.listWotds(opts, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Wotd-listWotds-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Wotd-listWotds-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using Org.OpenAPITools.Api;
+using Org.OpenAPITools.Client;
+using Org.OpenAPITools.Model;
+
+namespace Example
+{
+    public class listWotdsExample
+    {
+        public void main()
+        {
+
+            // Create an instance of the API class
+            var apiInstance = new WotdApi();
+            var size = new Integer(); // Integer | The number of words of the day (optional)  (default to null)
+            var before = new date(); // date | Return words of the day prior to and including this date (optional)  (default to null)
+
+            try {
+                array[Wotd] result = apiInstance.listWotds(size, before);
+                Debug.WriteLine(result);
+            } catch (Exception e) {
+                Debug.Print("Exception when calling WotdApi.listWotds: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Wotd-listWotds-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Create an instance of the API class
+$api_instance = new OpenAPITools\Client\Api\WotdApi();
+$size = ; // Integer | The number of words of the day
+$before = ; // date | Return words of the day prior to and including this date
+
+try {
+    $result = $api_instance->listWotds($size, $before);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling WotdApi->listWotds: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Wotd-listWotds-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::OPenAPIClient::Configuration;
+use WWW::OPenAPIClient::WotdApi;
+
+# Create an instance of the API class
+my $api_instance = WWW::OPenAPIClient::WotdApi->new();
+my $size = ; # Integer | The number of words of the day
+my $before = ; # date | Return words of the day prior to and including this date
+
+eval {
+    my $result = $api_instance->listWotds(size => $size, before => $before);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling WotdApi->listWotds: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Wotd-listWotds-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Create an instance of the API class
+api_instance = openapi_client.WotdApi()
+size =  # Integer | The number of words of the day (optional) (default to null)
+before =  # date | Return words of the day prior to and including this date (optional) (default to null)
+
+try:
+    api_response = api_instance.list_wotds(size=size, before=before)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling WotdApi->listWotds: %s\n" % e)</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Wotd-listWotds-0-rust">
+                              <pre class="prettyprint"><code class="language-rust">extern crate WotdApi;
+
+pub fn main() {
+    let size = ; // Integer
+    let before = ; // date
+
+    let mut context = WotdApi::Context::default();
+    let result = client.listWotds(size, before, &context).wait();
+
+    println!("{:?}", result);
+}
+</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Scopes</h2>
+                          <table>
+                            
+                          </table>
+
+                          <h2>Parameters</h2>
+
+
+
+
+
+                            <div class="methodsubtabletitle">Query parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">size</td>
+<td>
+
+
+    <div id="d2e199_listWotds_size">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    Integer
+                </span>
+
+                    <div class="inner description marked">
+The number of words of the day
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                                <tr><td style="width:150px;">before</td>
+<td>
+
+
+    <div id="d2e199_listWotds_before">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    date
+                </span>
+
+                    <div class="inner description marked">
+Return words of the day prior to and including this date
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                            </table>
+
+                          <h2>Responses</h2>
+                            <h3 id="examples-Wotd-listWotds-title-200"></h3>
+                            <p id="examples-Wotd-listWotds-description-200" class="marked"></p>
+                            <script>
+                              var responseWotd200_description = ``;
+                              var responseWotd200_description_break = responseWotd200_description.indexOf('\n');
+                              if (responseWotd200_description_break == -1) {
+                                $("#examples-Wotd-listWotds-title-200").text("Status: 200 - " + responseWotd200_description);
+                              } else {
+                                $("#examples-Wotd-listWotds-title-200").text("Status: 200 - " + responseWotd200_description.substring(0, responseWotd200_description_break));
+                                $("#examples-Wotd-listWotds-description-200").html(responseWotd200_description.substring(responseWotd200_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Wotd-listWotds-200" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Wotd-listWotds-200-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Wotd-listWotds-200-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Wotd-listWotds-200-schema">
+                                  <div id="responses-Wotd-listWotds-schema-200" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/Wotd"
+        }
+      }
+    }
+  }
+};
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                          schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Wotd-listWotds-200-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Wotd-listWotds-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Wotd-listWotds-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
                         </article>
