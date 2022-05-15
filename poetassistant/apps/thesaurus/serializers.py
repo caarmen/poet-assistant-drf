@@ -40,7 +40,7 @@ class ThesaurusEntrySerializer(serializers.HyperlinkedModelSerializer):
     """
     synonyms = CsvListField(child=serializers.CharField())
     antonyms = CsvListField(child=serializers.CharField())
-    part_of_speech = serializers.ChoiceField(choices=[e.value for e in PartOfSpeech],
+    part_of_speech = serializers.ChoiceField(choices=PartOfSpeech,
                                              read_only=True,
                                              source='part_of_speech_enum')
 

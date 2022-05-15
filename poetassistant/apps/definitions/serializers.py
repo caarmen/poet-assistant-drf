@@ -27,7 +27,7 @@ class DictionarySerializer(serializers.HyperlinkedModelSerializer):
     """
     Definition entry serializer
     """
-    part_of_speech = serializers.ChoiceField(choices=[e.value for e in PartOfSpeech],
+    part_of_speech = serializers.ChoiceField(choices=PartOfSpeech,
                                              read_only=True,
                                              source='part_of_speech_enum')
 
