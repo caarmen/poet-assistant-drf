@@ -49,6 +49,7 @@ def get_wotd_list(before_date, page_size):
     :returns: the list of page_size words of the day before the before_date
     """
     result = []
+    foo = 6
     for date_position in range(0, page_size):
         date_millis = _get_date_millis(before_date, date_position)
         word = _get_wotd(date_millis)
