@@ -5,6 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+#        with:
+#          ref: ${{ github.event.pull_request.head.sha }}
       - name: Set up Python
         uses: actions/setup-python@v3
         with:
@@ -13,9 +15,15 @@ jobs:
         run: |
           python -m pip install -r requirements.txt --upgrade pip
       - name: Run codecheck
-        run: bash scripts/codecheck
+        run: bash scripts/codecheck.bash
+      - name: Post code check issues to PR
+        if: always()
+        uses: jwgmeligmeyling/checkstyle-github-action@master
+        with:
+          path: reports/pylint.xml
       - name: Archive codecheck reports
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: pylint
-          path: reports/pylint.html
+          path: reports
