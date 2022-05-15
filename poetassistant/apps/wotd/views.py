@@ -91,13 +91,13 @@ class WotdSet(GenericViewSet):
         param_size = self.request.query_params.get("size", None)
         try:
             return self._default_page_size_value if param_size is None else int(param_size)
-        except ValueError:
-            raise ValidationError(f"Invalid value {param_size} for size")
+        except ValueError as error:
+            raise ValidationError(f"Invalid value {param_size} for size") from error
 
     def _get_before(self):
         param_before = self.request.query_params.get("before", None)
         try:
             return self._default_before_value() if param_before is None \
                 else datetime.fromisoformat(param_before).date()
-        except ValueError:
-            raise ValidationError(f"Invalid value {param_before} for before")
+        except ValueError as error:
+            raise ValidationError(f"Invalid value {param_before} for before") from error
