@@ -50,7 +50,8 @@ class WotdFilterBackend(BaseFilterBackend):
                 'name': 'before',
                 'required': False,
                 'in': 'query',
-                'description': force_str('Return words of the day prior to and including this date'),
+                'description':
+                    force_str('Return words of the day prior to and including this date'),
                 'schema': {
                     'type': 'date',
                 },
@@ -96,6 +97,7 @@ class WotdSet(GenericViewSet):
     def _get_before(self):
         param_before = self.request.query_params.get("before", None)
         try:
-            return self._default_before_value() if param_before is None else datetime.fromisoformat(param_before).date()
+            return self._default_before_value() if param_before is None \
+                else datetime.fromisoformat(param_before).date()
         except ValueError:
             raise ValidationError(f"Invalid value {param_before} for before")

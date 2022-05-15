@@ -69,5 +69,6 @@ class RhymesService:
         """
         :returns: a rhymes query set for rhymes of the given word
         """
-        return Rhymes.objects.none() if word is None else Rhymes.objects.using('poet_assistant').raw(
+        return Rhymes.objects.none() if word is None \
+            else Rhymes.objects.using('poet_assistant').raw(
             self._full_query_template, [word, word, word, word])
