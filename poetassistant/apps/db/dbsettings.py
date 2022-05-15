@@ -14,6 +14,9 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
+"""
+Poet Assistant db settings
+"""
 import os
 from pathlib import Path
 

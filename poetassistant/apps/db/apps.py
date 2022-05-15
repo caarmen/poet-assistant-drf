@@ -14,9 +14,15 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
+"""
+Poet assistant db app
+"""
 from django.apps import AppConfig
 
 
 class DbConfig(AppConfig):
+    """
+    Poet assistant db app config
+    """
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'poetassistant.apps.db'

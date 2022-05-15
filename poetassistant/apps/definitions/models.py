@@ -14,6 +14,9 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
+"""
+Definitions models
+"""
 from django.db import models
 
 from poetassistant.apps.commonapi.partofspeech import PartOfSpeech
@@ -21,6 +24,9 @@ from poetassistant.apps.definitions import apps
 
 
 class Dictionary(models.Model):
+    """
+    Dictionary entry model
+    """
     rowid = models.IntegerField(primary_key=True)
     word = models.CharField(max_length=128)
     part_of_speech = models.CharField(max_length=1)
@@ -29,6 +35,10 @@ class Dictionary(models.Model):
     objects = models.Manager()
 
     def part_of_speech_enum(self):
+        """
+        :returns: the part of speech of the word
+        :rtype: PartOfSpeech
+        """
         return {
             'a': PartOfSpeech.ADJECTIVE,
             'r': PartOfSpeech.ADVERB,
@@ -36,7 +46,11 @@ class Dictionary(models.Model):
             'v': PartOfSpeech.VERB
         }[self.part_of_speech]
 
+    # pylint: disable=too-few-public-methods
     class Meta:
+        """
+        Definition model meta data
+        """
         db_table = 'dictionary'
         unique_together = ("word", "definition")
         app_label = apps.DefinitionsConfig.name

@@ -14,19 +14,27 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
+"""
+Port the java implementation of Random.nextInt() using a seed.
+This is so we have the same words of the day across the different platforms (android, iOS, ...)
+We also ported the java version to the iOS app:
+https://github.com/caarmen/poet-assistant-ios/blob/master/PoetAssistantLexiconsFramework/src/wotd/Random.swift
+One of the java implementations (for Android):
+https://android.googlesource.com/platform/libcore.git/+/refs/heads/marshmallow-mr3-release/luni/src/main/java/java/util/Random.java
+"""
 
-# Port the java implementation of Random.nextInt() using a seed.
-# This is so we have the same words of the day across the different platforms (android, iOS, ...)
-# We also ported the java version to the iOS app:
-# https://github.com/caarmen/poet-assistant-ios/blob/master/PoetAssistantLexiconsFramework/src/wotd/Random.swift
-# One of the java implementations (for Android):
-# https://android.googlesource.com/platform/libcore.git/+/refs/heads/marshmallow-mr3-release/luni/src/main/java/java/util/Random.java
 
 class Random:
+    """
+    Random number generator
+    """
     _seed = 0
     _multiplier = 0x5deece66d
 
     def set_seed(self, input_seed):
+        """
+        Set the seed for the generation of random numbers
+        """
         self._seed = self._create_seed(input_seed)
 
     @classmethod
@@ -34,6 +42,10 @@ class Random:
         return (input_seed ^ cls._multiplier) & ((1 << 48) - 1)
 
     def next_int(self, upper_bound):
+        """
+        :returns: a random int between 0 and upper_bound, exclusive
+        :rtype: int
+        """
         if (upper_bound & -upper_bound) == upper_bound:
             return self._next(31)
         bits = self._next(31)
