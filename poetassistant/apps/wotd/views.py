@@ -22,12 +22,11 @@ from datetime import datetime
 from django.utils.encoding import force_str
 from rest_framework.exceptions import ValidationError
 from rest_framework.filters import BaseFilterBackend
-from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
+from poetassistant.apps.wotd import service
 from poetassistant.apps.wotd.serializers import WotdSerializer
-from poetassistant.apps.wotd.service import WotdService
 
 
 class WotdFilterBackend(BaseFilterBackend):
@@ -71,9 +70,9 @@ class WotdSet(GenericViewSet):
     serializer_class = WotdSerializer
 
     _default_page_size_value = 1
-    _service = WotdService()
 
-    def list(self, request, format=None):
+    # pylint: disable=unused-argument
+    def list(self, request):
         """
         :returns: a response containing the list of words of the day
         """
@@ -82,7 +81,7 @@ class WotdSet(GenericViewSet):
         return Response(serializer.data)
 
     def get_queryset(self):
-        return self._service.get_wotd_list(self._get_before(), self._get_page_size())
+        return service.get_wotd_list(self._get_before(), self._get_page_size())
 
     @staticmethod
     def _default_before_value():

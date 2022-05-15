@@ -21,8 +21,8 @@ from rest_framework import filters
 from rest_framework.mixins import ListModelMixin
 from rest_framework.viewsets import GenericViewSet
 
+from poetassistant.apps.rhymes import service
 from poetassistant.apps.rhymes.serializers import RhymesSerializer
-from poetassistant.apps.rhymes.service import RhymesService
 
 
 class WordSearchFilter(filters.SearchFilter):
@@ -40,13 +40,12 @@ class RhymeSet(ListModelMixin,
     serializer_class = RhymesSerializer
     filter_backends = [WordSearchFilter]
     search_fields = ['=word']
-    _service = RhymesService()
 
     def _get_search_word(self):
         return self.request.query_params.get(WordSearchFilter.search_param, None)
 
     def _create_queryset(self):
-        return self._service.create_queryset(self._get_search_word())
+        return service.create_queryset(self._get_search_word())
 
     def get_queryset(self):
         return self._create_queryset()
