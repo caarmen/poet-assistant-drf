@@ -1,1 +1,3 @@
+mkdir -p reports
+set -o pipefail -e
 pylint poetassistant --output-format=json| tee reports/pylint.json | pylint-json2html -o reports/pylint.html
