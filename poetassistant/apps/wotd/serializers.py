@@ -14,6 +14,9 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
+"""
+Wotd serializers
+"""
 import dataclasses
 
 from rest_framework import serializers
@@ -22,10 +25,17 @@ from poetassistant.apps.wotd.service import WotdEntry
 
 
 class WotdSerializer(serializers.Serializer):
+    """
+    Wotd serializer
+    """
     date = serializers.DateField()
     word = serializers.CharField()
 
+    # pylint: disable=too-few-public-methods
     class Meta:
+        """
+        Wotd serializer metadata
+        """
         fields = [f.name for f in dataclasses.fields(WotdEntry)]
 
     def update(self, instance, validated_data):

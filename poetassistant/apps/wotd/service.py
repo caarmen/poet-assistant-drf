@@ -12,6 +12,9 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
+"""
+Wotd service module
+"""
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 
@@ -21,11 +24,17 @@ from poetassistant.apps.wotd.random import Random
 
 @dataclass
 class WotdEntry:
+    """
+    Wotd entry data class
+    """
     word: str
     date: datetime.date
 
 
 class WotdService:
+    """
+    Wotd service
+    """
     # When looking up random words, their "frequency" is a factor in the selection.
     # Words which are too frequent (a, the, why) are not interesting words.
     # Words which are too rare (aalto) are likely not interesting either.
@@ -36,6 +45,9 @@ class WotdService:
     _MAX_INTERESTING_FREQUENCY = 25000
 
     def get_wotd_list(self, before_date, page_size):
+        """
+        :returns: the list of page_size words of the day before the before_date
+        """
         result = []
         for date_position in range(0, page_size):
             date_millis = self._get_date_millis(before_date, date_position)

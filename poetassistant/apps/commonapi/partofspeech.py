@@ -13,11 +13,17 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
+"""
+Part of speech enum
+"""
 
 from enum import Enum
 
 
 class PartOfSpeech(str, Enum):
+    """
+    Part of speech enum
+    """
     NOUN = "noun"
     VERB = "verb"
     ADJECTIVE = "adjective"

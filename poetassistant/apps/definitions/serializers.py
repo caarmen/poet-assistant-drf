@@ -14,6 +14,9 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
+"""
+Definitions serializers
+"""
 from rest_framework import serializers
 
 from poetassistant.apps.commonapi.partofspeech import PartOfSpeech
@@ -21,9 +24,16 @@ from poetassistant.apps.definitions.models import Dictionary
 
 
 class DictionarySerializer(serializers.HyperlinkedModelSerializer):
+    """
+    Definition entry serializer
+    """
     part_of_speech = serializers.ChoiceField(choices=[e.value for e in PartOfSpeech], read_only=True,
                                              source='part_of_speech_enum')
 
+    # pylint: disable=too-few-public-methods
     class Meta:
+        """
+        Definition serializer meta data
+        """
         model = Dictionary
         fields = ['part_of_speech', 'definition']

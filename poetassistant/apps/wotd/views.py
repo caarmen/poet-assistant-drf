@@ -14,6 +14,9 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
+"""
+Wotd view module
+"""
 from datetime import datetime
 
 from django.utils.encoding import force_str
@@ -28,6 +31,9 @@ from poetassistant.apps.wotd.service import WotdService
 
 
 class WotdFilterBackend(BaseFilterBackend):
+    """
+    Defines search filters for the wotd
+    """
 
     def get_schema_operation_parameters(self, view):
         return [
@@ -57,7 +63,7 @@ class WotdFilterBackend(BaseFilterBackend):
 
 class WotdSet(GenericViewSet):
     """
-    Return the word(s) of the day.
+    View set to list rhyme entries
     """
     pagination_class = None
     filter_backends = [WotdFilterBackend]
@@ -67,6 +73,9 @@ class WotdSet(GenericViewSet):
     _service = WotdService()
 
     def list(self, request, format=None):
+        """
+        :returns: a response containing the list of words of the day
+        """
         wotd_list = self.get_queryset()
         serializer = super().get_serializer(wotd_list, many=True)
         return Response(serializer.data)

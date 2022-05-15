@@ -14,23 +14,39 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
+"""
+Rhymes serializers
+"""
 from rest_framework import serializers
 
 from poetassistant.apps.rhymes.models import Rhymes
 
 
 class RhymesSerializer(serializers.HyperlinkedModelSerializer):
+    """
+    Rhyme serializer
+    """
     syllables_type = serializers.SerializerMethodField()
     syllables = serializers.SerializerMethodField()
 
     @staticmethod
     def get_syllables_type(obj):
+        """
+        :returns: the type of syllable match for a rhyme entry
+        """
         return obj.syllables_type
 
     @staticmethod
     def get_syllables(obj):
+        """
+        :returns: the matching syllables for a rhyme entry
+        """
         return obj.syllables
 
+    # pylint: disable=too-few-public-methods
     class Meta:
+        """
+        Rhyme serializer meta data
+        """
         model = Rhymes
         fields = ['syllables_type', 'syllables', 'word']

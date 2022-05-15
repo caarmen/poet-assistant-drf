@@ -14,9 +14,15 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
+"""
+Thesaurus app
+"""
 from django.apps import AppConfig
 
 
 class ThesaurusConfig(AppConfig):
+    """
+    Thesaurus app config
+    """
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'poetassistant.apps.thesaurus'

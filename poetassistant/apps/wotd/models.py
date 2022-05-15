@@ -14,18 +14,28 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
+"""
+Wotd models
+"""
 from django.db import models
 
 from poetassistant.apps.wotd import apps
 
 
 class Stem(models.Model):
+    """
+    Word stem model
+    """
     rowid = models.IntegerField(primary_key=True)
     word = models.CharField(max_length=128)
     google_ngram_frequency = models.IntegerField()
 
     objects = models.Manager()
 
+    # pylint: disable=too-few-public-methods
     class Meta:
+        """
+        Wotd model meta data
+        """
         db_table = 'stems'
         app_label = apps.WotdConfig.name

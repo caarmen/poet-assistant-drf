@@ -1,3 +1,7 @@
+"""
+Poet Assistant app
+"""
+
 # Copyright (c) 2022 - present Carmen Alvarez
 #
 # This file is part of Poet Assistant.
@@ -18,5 +22,8 @@ from django.apps import AppConfig
 
 
 class AppsConfig(AppConfig):
+    """
+    Poet Assistant app config
+    """
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'apps'

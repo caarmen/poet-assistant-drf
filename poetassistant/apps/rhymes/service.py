@@ -12,10 +12,16 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
+"""
+Rheymes service module
+"""
 from poetassistant.apps.rhymes.models import Rhymes
 
 
 class RhymesService:
+    """
+    Rhymes service
+    """
     _subquery_template = """
         SELECT
           source_word_variants.rowid,
@@ -60,5 +66,8 @@ class RhymesService:
             **{'syllables_type': syllables_type, 'syllables_sort_key': syllables_sort_key})
 
     def create_queryset(self, word):
+        """
+        :returns: a rhymes query set for rhymes of the given word
+        """
         return Rhymes.objects.none() if word is None else Rhymes.objects.using('poet_assistant').raw(
             self._full_query_template, [word, word, word, word])
