@@ -35,27 +35,20 @@ class WotdFilterBackend(BaseFilterBackend):
     """
 
     def get_schema_operation_parameters(self, view):
-        return [
-            {
-                'name': 'size',
-                'required': False,
-                'in': 'query',
-                'description': force_str('The number of words of the day'),
-                'schema': {
-                    'type': 'int',
-                },
-            },
-            {
-                'name': 'before',
-                'required': False,
-                'in': 'query',
-                'description':
-                    force_str('Return words of the day prior to and including this date'),
-                'schema': {
-                    'type': 'date',
-                },
-            },
-        ]
+        return [{
+            'name': 'size',
+            'required': False,
+            'in': 'query',
+            'description': force_str('The number of words of the day'),
+            'schema': {'type': 'int'}
+        }, {
+            'name': 'before',
+            'required': False,
+            'in': 'query',
+            'description':
+                force_str('Return words of the day prior to and including this date'),
+            'schema': {'type': 'date'}
+        }]
 
     def filter_queryset(self, request, queryset, view):
         return queryset

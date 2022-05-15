@@ -29,7 +29,8 @@ _SUBQUERY_TEMPLATE = """
       source_word_variants.{syllables_type}
     FROM
       word_variants AS source_word_variants
-      JOIN word_variants AS rhymes_word_variants ON source_word_variants.{syllables_type} = rhymes_word_variants.{syllables_type}
+      JOIN word_variants AS rhymes_word_variants 
+        ON source_word_variants.{syllables_type} = rhymes_word_variants.{syllables_type}
       AND source_word_variants.word != rhymes_word_variants.word
     WHERE
       rhymes_word_variants.has_definition = 1
