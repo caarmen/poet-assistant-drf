@@ -65,6 +65,7 @@ class WotdSet(GenericViewSet):
     _default_page_size_value = 1
 
     # pylint: disable=unused-argument
+    # noinspection PyUnusedLocal
     def list(self, request):
         """
         :returns: a response containing the list of words of the day
