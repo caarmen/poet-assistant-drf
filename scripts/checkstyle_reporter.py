@@ -1,6 +1,7 @@
 """
 Checkstyle plugin for pylint
 """
+from itertools import groupby
 from typing import TYPE_CHECKING, Optional
 from xml.dom import minidom
 
@@ -27,16 +28,23 @@ class CheckstyleReporter(BaseReporter):
         root = minidom.Document()
         checkstyle = root.createElement('checkstyle')
         root.appendChild(checkstyle)
-        for msg in self.messages:
+        messages_by_file = {abspath: list(messages)
+                            for abspath, messages in
+                            (groupby(
+                                sorted(self.messages, key=lambda x: x.abspath),
+                                lambda x: x.abspath)
+                            )}
+        for abspath in messages_by_file:
             file = root.createElement("file")
-            file.setAttribute("name", msg.abspath)
-            error = root.createElement("error")
-            error.setAttribute("line", str(msg.line))
-            error.setAttribute("column", str(msg.column))
-            error.setAttribute("message", msg.msg)
-            error.setAttribute("source", msg.msg_id)
-            file.appendChild(error)
-            checkstyle.appendChild(file)
+            file.setAttribute("name", abspath)
+            for msg in messages_by_file[abspath]:
+                error = root.createElement("error")
+                error.setAttribute("line", str(msg.line))
+                error.setAttribute("column", str(msg.column))
+                error.setAttribute("message", msg.msg)
+                error.setAttribute("source", msg.msg_id)
+                file.appendChild(error)
+                checkstyle.appendChild(file)
         print(root.toprettyxml(indent="  "))
 
 
