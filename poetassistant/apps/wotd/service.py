@@ -32,7 +32,7 @@ class WotdEntry:
 
 
 # When looking up random words, their "frequency" is a factor in the selection.
-# Words which are too frequent (a, the, why) are not interesting words.
+# Words which are too frequent ("a", "the", "why") are not interesting words.
 # Words which are too rare (aalto) are likely not interesting either.
 
 # Note: we want the words with frequency between 1500 and 25000 exclusive, to
