@@ -84,7 +84,8 @@ class WotdSet(GenericViewSet):
     def get_queryset(self):
         return self._service.get_wotd_list(self._get_before(), self._get_page_size())
 
-    def _default_before_value(self):
+    @staticmethod
+    def _default_before_value():
         return datetime.utcnow().date()
 
     def _get_page_size(self):

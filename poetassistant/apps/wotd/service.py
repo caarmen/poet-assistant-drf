@@ -63,11 +63,13 @@ class WotdService:
         db_position = self._get_db_position_for_date(date_millis, interesting_stem_entries.count())
         return interesting_stem_entries[db_position].word
 
-    def _get_db_position_for_date(self, date_millis, db_size):
+    @staticmethod
+    def _get_db_position_for_date(date_millis, db_size):
         rnd = Random()
         rnd.set_seed(date_millis)
         return rnd.next_int(db_size)
 
-    def _get_date_millis(self, input_date_midnight, days_before):
+    @staticmethod
+    def _get_date_millis(input_date_midnight, days_before):
         target_date_midnight = input_date_midnight - timedelta(days_before)
         return int(datetime.fromordinal(target_date_midnight.toordinal()).timestamp() * 1000)
