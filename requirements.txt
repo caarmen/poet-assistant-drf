@@ -7,12 +7,14 @@ django-filter==21.1
 django-heroku==0.3.1
 djangorestframework==3.13.1
 enum34==1.1.10
+flake8-checkstyle==0.1.2
+flake8==4.0.1
 gunicorn==20.1.0
 isort==5.10.1
 Jinja2==3.1.2
 lazy-object-proxy==1.7.1
 MarkupSafe==2.1.1
-mccabe==0.7.0
+mccabe==0.6.1
 platformdirs==2.5.2
 psycopg2==2.9.3
 pylint==2.13.9
