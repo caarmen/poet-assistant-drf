@@ -17,6 +17,7 @@ platformdirs==2.5.2
 psycopg2==2.9.3
 pylint==2.13.9
 pylint-json2html==0.4.0
+pylint-json2checkstyle==0.0.7
 pytz==2022.1
 PyYAML==6.0
 sqlparse==0.4.2
