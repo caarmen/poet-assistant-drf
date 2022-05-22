@@ -20,7 +20,7 @@ jobs:
         if: always()
         uses: jwgmeligmeyling/checkstyle-github-action@master
         with:
-          path: reports/pylint.xml
+          path: "reports/*-checkstyle.xml"
       - name: Archive codecheck reports
         if: always()
         uses: actions/upload-artifact@v3

@@ -14,9 +14,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
-"""
-Wotd view module
-"""
 from datetime import datetime
 
 from django.utils.encoding import force_str
@@ -63,6 +60,9 @@ class WotdSet(GenericViewSet):
     serializer_class = WotdSerializer
 
     _default_page_size_value = 1
+
+    def _unused_function(self, request):
+        print("hello")
 
     # pylint: disable=unused-argument
     # noinspection PyUnusedLocal
