@@ -19,6 +19,7 @@ Thesaurus models
 """
 from django.db import models
 
+from poetassistant.apps.db.dbrouter import DbRouter
 from poetassistant.apps.commonapi.partofspeech import PartOfSpeech
 from poetassistant.apps.thesaurus import apps
 
@@ -56,3 +57,6 @@ class ThesaurusEntry(models.Model):
 
         db_table = "thesaurus"
         app_label = apps.ThesaurusConfig.name
+
+
+DbRouter.register_model(ThesaurusEntry)

@@ -75,7 +75,5 @@ def create_queryset(word):
     return (
         Rhymes.objects.none()
         if word is None
-        else Rhymes.objects.using("poet_assistant").raw(
-            FULL_QUERY_TEMPLATE, [word, word, word, word]
-        )
+        else Rhymes.objects.raw(FULL_QUERY_TEMPLATE, [word, word, word, word])
     )

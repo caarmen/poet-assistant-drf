@@ -19,6 +19,7 @@ Wotd models
 """
 from django.db import models
 
+from poetassistant.apps.db.dbrouter import DbRouter
 from poetassistant.apps.wotd import apps
 
 
@@ -41,3 +42,6 @@ class Stem(models.Model):
 
         db_table = "stems"
         app_label = apps.WotdConfig.name
+
+
+DbRouter.register_model(Stem)

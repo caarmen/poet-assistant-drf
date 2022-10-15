@@ -28,6 +28,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from pathlib import Path
 
+from poetassistant.apps.db.dbrouter import DbRouter
 from poetassistant.apps.db.dbsettings import DB_DATABASES
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -104,6 +105,7 @@ DATABASES = {
     }
 }
 DATABASES.update(DB_DATABASES)
+DATABASE_ROUTERS = [f"{DbRouter.__module__}.{DbRouter.__name__}"]
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

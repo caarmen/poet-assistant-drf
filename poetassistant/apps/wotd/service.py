@@ -56,11 +56,9 @@ def get_wotd_list(before_date, page_size):
 
 
 def _get_wotd(date_millis):
-    interesting_stem_entries = (
-        Stem.objects.using("poet_assistant")
-        .exclude(google_ngram_frequency__lte=_MIN_INTERESTING_FREQUENCY)
-        .exclude(google_ngram_frequency__gte=_MAX_INTERESTING_FREQUENCY)
-    )
+    interesting_stem_entries = Stem.objects.exclude(
+        google_ngram_frequency__lte=_MIN_INTERESTING_FREQUENCY
+    ).exclude(google_ngram_frequency__gte=_MAX_INTERESTING_FREQUENCY)
     db_position = _get_db_position_for_date(
         date_millis, interesting_stem_entries.count()
     )
