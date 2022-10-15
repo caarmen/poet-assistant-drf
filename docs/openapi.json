@@ -1,0 +1,411 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Poet Assistant API",
+        "version": "1.0.0",
+        "description": "English-language tools for writing poetry"
+    },
+    "paths": {
+        "/definitions/": {
+            "get": {
+                "operationId": "definitions_list",
+                "description": "View set to list definition entries",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "required": false,
+                        "in": "query",
+                        "description": "A page number within the paginated result set.",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "word",
+                        "required": false,
+                        "in": "query",
+                        "description": "A search term.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "tags": [
+                    "definitions"
+                ],
+                "security": [
+                    {
+                        "cookieAuth": []
+                    },
+                    {
+                        "basicAuth": []
+                    },
+                    {}
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedDictionaryList"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/rhymes/": {
+            "get": {
+                "operationId": "rhymes_list",
+                "description": "View set to list rhyme entries",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "required": false,
+                        "in": "query",
+                        "description": "A page number within the paginated result set.",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "word",
+                        "required": false,
+                        "in": "query",
+                        "description": "A search term.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "tags": [
+                    "rhymes"
+                ],
+                "security": [
+                    {
+                        "cookieAuth": []
+                    },
+                    {
+                        "basicAuth": []
+                    },
+                    {}
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedRhymesList"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/thesaurus/": {
+            "get": {
+                "operationId": "thesaurus_list",
+                "description": "View set to list thesaurus entries",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "required": false,
+                        "in": "query",
+                        "description": "A page number within the paginated result set.",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "word",
+                        "required": false,
+                        "in": "query",
+                        "description": "A search term.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "tags": [
+                    "thesaurus"
+                ],
+                "security": [
+                    {
+                        "cookieAuth": []
+                    },
+                    {
+                        "basicAuth": []
+                    },
+                    {}
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedThesaurusEntryList"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/wotd/": {
+            "get": {
+                "operationId": "wotd_list",
+                "description": ":returns: a response containing the list of words of the day",
+                "parameters": [
+                    {
+                        "name": "before",
+                        "required": false,
+                        "in": "query",
+                        "description": "Return words of the day prior to and including this date",
+                        "schema": {
+                            "type": "date"
+                        }
+                    },
+                    {
+                        "name": "size",
+                        "required": false,
+                        "in": "query",
+                        "description": "The number of words of the day",
+                        "schema": {
+                            "type": "int"
+                        }
+                    }
+                ],
+                "tags": [
+                    "wotd"
+                ],
+                "security": [
+                    {
+                        "cookieAuth": []
+                    },
+                    {
+                        "basicAuth": []
+                    },
+                    {}
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Wotd"
+                                    }
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Dictionary": {
+                "type": "object",
+                "description": "Definition entry serializer",
+                "properties": {
+                    "part_of_speech": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/PartOfSpeechEnum"
+                            }
+                        ],
+                        "readOnly": true
+                    },
+                    "definition": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "definition",
+                    "part_of_speech"
+                ]
+            },
+            "PaginatedDictionaryList": {
+                "type": "object",
+                "properties": {
+                    "count": {
+                        "type": "integer",
+                        "example": 123
+                    },
+                    "next": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uri",
+                        "example": "http://api.example.org/accounts/?page=4"
+                    },
+                    "previous": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uri",
+                        "example": "http://api.example.org/accounts/?page=2"
+                    },
+                    "results": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Dictionary"
+                        }
+                    }
+                }
+            },
+            "PaginatedRhymesList": {
+                "type": "object",
+                "properties": {
+                    "count": {
+                        "type": "integer",
+                        "example": 123
+                    },
+                    "next": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uri",
+                        "example": "http://api.example.org/accounts/?page=4"
+                    },
+                    "previous": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uri",
+                        "example": "http://api.example.org/accounts/?page=2"
+                    },
+                    "results": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Rhymes"
+                        }
+                    }
+                }
+            },
+            "PaginatedThesaurusEntryList": {
+                "type": "object",
+                "properties": {
+                    "count": {
+                        "type": "integer",
+                        "example": 123
+                    },
+                    "next": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uri",
+                        "example": "http://api.example.org/accounts/?page=4"
+                    },
+                    "previous": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uri",
+                        "example": "http://api.example.org/accounts/?page=2"
+                    },
+                    "results": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ThesaurusEntry"
+                        }
+                    }
+                }
+            },
+            "PartOfSpeechEnum": {
+                "enum": [
+                    "PartOfSpeech.NOUN",
+                    "PartOfSpeech.VERB",
+                    "PartOfSpeech.ADJECTIVE",
+                    "PartOfSpeech.ADVERB",
+                    "PartOfSpeech.UNKNOWN"
+                ],
+                "type": "string"
+            },
+            "Rhymes": {
+                "type": "object",
+                "description": "Rhyme serializer",
+                "properties": {
+                    "syllables_type": {
+                        "type": "string",
+                        "readOnly": true
+                    },
+                    "syllables": {
+                        "type": "string",
+                        "readOnly": true
+                    },
+                    "word": {
+                        "type": "string",
+                        "maxLength": 34
+                    }
+                },
+                "required": [
+                    "syllables",
+                    "syllables_type",
+                    "word"
+                ]
+            },
+            "ThesaurusEntry": {
+                "type": "object",
+                "description": "Thesaurus entry serialzier",
+                "properties": {
+                    "part_of_speech": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/PartOfSpeechEnum"
+                            }
+                        ],
+                        "readOnly": true
+                    },
+                    "synonyms": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "antonyms": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "antonyms",
+                    "part_of_speech",
+                    "synonyms"
+                ]
+            },
+            "Wotd": {
+                "type": "object",
+                "description": "Wotd serializer",
+                "properties": {
+                    "date": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "word": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "date",
+                    "word"
+                ]
+            }
+        },
+        "securitySchemes": {
+            "basicAuth": {
+                "type": "http",
+                "scheme": "basic"
+            },
+            "cookieAuth": {
+                "type": "apiKey",
+                "in": "cookie",
+                "name": "sessionid"
+            }
+        }
+    }
+}
