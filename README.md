@@ -5,7 +5,7 @@ Poet Assistant REST api using Django Rest Framework
 * Run the following commands:
   * `python3 -m venv env`
   * `source env/bin/activate`
-  * `pip install -r requirements.txt`
+  * `pip install -r requirements/dev.txt`
   * `python manage.py migrate`
   * `python manage.py runserver`
 * Open the landing page at http://127.0.0.1:8000

@@ -1,0 +1,5 @@
+-r common.txt
+black==22.10.0
+pylint==2.13.9
+pylint-json2html==0.4.0
+pylint-json2checkstyle==0.0.9
