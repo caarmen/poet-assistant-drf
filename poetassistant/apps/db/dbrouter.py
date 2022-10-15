@@ -33,7 +33,7 @@ class DbRouter:
         """
         cls._models.append(model)
 
-    def db_for_read(self, model, **hints):
+    def db_for_read(self, model):
         """
         :return: the poet assistant database for our registered models
         """
