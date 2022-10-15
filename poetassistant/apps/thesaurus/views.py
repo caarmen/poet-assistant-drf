@@ -30,7 +30,7 @@ class ThesaurusEntrySet(ListModelMixin, GenericViewSet):
     View set to list thesaurus entries
     """
 
-    queryset = ThesaurusEntry.objects.using("poet_assistant").all()
+    queryset = ThesaurusEntry.objects.all()
     serializer_class = ThesaurusEntrySerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ["=word"]

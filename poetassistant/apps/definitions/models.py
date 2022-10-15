@@ -19,6 +19,7 @@ Definitions models
 """
 from django.db import models
 
+from poetassistant.apps.db.dbrouter import DbRouter
 from poetassistant.apps.commonapi.partofspeech import PartOfSpeech
 from poetassistant.apps.definitions import apps
 
@@ -56,3 +57,6 @@ class Dictionary(models.Model):
         db_table = "dictionary"
         unique_together = ("word", "definition")
         app_label = apps.DefinitionsConfig.name
+
+
+DbRouter.register_model(Dictionary)

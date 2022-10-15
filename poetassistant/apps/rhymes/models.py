@@ -19,6 +19,7 @@ Rhymes models
 """
 from django.db import models
 
+from poetassistant.apps.db.dbrouter import DbRouter
 from poetassistant.apps.rhymes import apps
 
 
@@ -47,3 +48,6 @@ class Rhymes(models.Model):
         db_table = "word_variants"
         unique_together = ("word", "variant_number")
         app_label = apps.RhymesConfig.name
+
+
+DbRouter.register_model(Rhymes)

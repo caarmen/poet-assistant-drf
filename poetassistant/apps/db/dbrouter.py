@@ -15,23 +15,28 @@
 # You should have received a copy of the GNU General Public License
 # along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
 """
-Definitions view module
+Poet Assistant db router
 """
-from rest_framework import filters
-from rest_framework.mixins import ListModelMixin
-from rest_framework.viewsets import GenericViewSet
-
-from poetassistant.apps.definitions.models import Dictionary
-from poetassistant.apps.definitions.serializers import DictionarySerializer
 
 
-class DefinitionSet(ListModelMixin, GenericViewSet):
+class DbRouter:
     """
-    View set to list definition entries
+    Poet Assistant db router
     """
 
-    queryset = Dictionary.objects.all()
-    serializer_class = DictionarySerializer
-    filter_backends = [filters.SearchFilter]
-    search_fields = ["=word"]
-    ordering = ["word", "part_of_speech", "definition"]
+    _models = []
+
+    @classmethod
+    def register_model(cls, model):
+        """
+        Let us know that the poet assistant db can handle this model
+        """
+        cls._models.append(model)
+
+    def db_for_read(self, model, **hints):
+        """
+        :return: the poet assistant database for our registered models
+        """
+        if model in self._models:
+            return "poet_assistant"
+        return None
