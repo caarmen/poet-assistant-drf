@@ -1,3 +1,4 @@
+# Copyright (c) 2022 - present Carmen Alvarez
 #
 # This file is part of Poet Assistant.
 #
@@ -55,9 +56,12 @@ class PartOfSpeechField(ChoiceField):
             adjective_value: PartOfSpeech.ADJECTIVE,
             adverb_value: PartOfSpeech.ADVERB,
         }
+        self._api_to_model_part_of_speech = {
+            v: k for k, v in self._model_to_api_part_of_speech.items()
+        }
 
     def to_representation(self, value) -> PartOfSpeech:
-        """
-        Map the part of speech from the model to the common api enum
-        """
         return self._model_to_api_part_of_speech.get(value, PartOfSpeech.UNKNOWN)
+
+    def to_internal_value(self, data):
+        return self._api_to_model_part_of_speech.get(data)

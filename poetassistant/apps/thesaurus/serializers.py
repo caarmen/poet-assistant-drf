@@ -24,14 +24,16 @@ from poetassistant.apps.commonapi.fields import PartOfSpeechField
 from poetassistant.apps.thesaurus.models import ThesaurusEntry
 
 
-class CsvListField(serializers.ListField):
+class CsvField(serializers.Field):
     """
     Serializer which convets a comma-separated string into a list of strings
     """
 
-    def get_attribute(self, instance):
-        result = super().get_attribute(instance)
-        return [x for x in result.split(",") if x]
+    def to_representation(self, value):
+        return [x for x in value.split(",") if x]
+
+    def to_internal_value(self, data):
+        return ",".join(data)
 
 
 class ThesaurusEntrySerializer(serializers.HyperlinkedModelSerializer):
@@ -39,8 +41,8 @@ class ThesaurusEntrySerializer(serializers.HyperlinkedModelSerializer):
     Thesaurus entry serialzier
     """
 
-    synonyms = CsvListField(child=serializers.CharField())
-    antonyms = CsvListField(child=serializers.CharField())
+    synonyms = CsvField()
+    antonyms = CsvField()
     part_of_speech = PartOfSpeechField(
         noun_value=ThesaurusEntry.NOUN,
         verb_value=ThesaurusEntry.VERB,
@@ -48,6 +50,10 @@ class ThesaurusEntrySerializer(serializers.HyperlinkedModelSerializer):
         adverb_value=ThesaurusEntry.ADVERB,
         source="word_type",
     )
+
+    def to_internal_value(self, data):
+        result = super().to_internal_value(data)
+        return ThesaurusEntry(**result)
 
     # pylint: disable=too-few-public-methods
     class Meta:

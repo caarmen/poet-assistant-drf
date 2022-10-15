@@ -15,21 +15,25 @@
 # You should have received a copy of the GNU General Public License
 # along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
 """
-Definitions view module
+Pagination customizations
 """
-from rest_framework.viewsets import GenericViewSet
-
-from poetassistant.apps.commonapi.pagination import NoEmptyPagePagination
-from poetassistant.apps.commonapi.search import RequiredSearchListModelMixin
-from poetassistant.apps.definitions.models import Dictionary
-from poetassistant.apps.definitions.serializers import DictionarySerializer
+from django.core.paginator import Paginator
+from rest_framework.pagination import PageNumberPagination
 
 
-class DefinitionSet(RequiredSearchListModelMixin, GenericViewSet):
+class NoEmptyPagePaginator(Paginator):
     """
-    View set to list definition entries
+    Paginator which raises an error if the first page is empty
     """
 
-    queryset = Dictionary.objects.all().order_by("part_of_speech", "definition")
-    pagination_class = NoEmptyPagePagination
-    serializer_class = DictionarySerializer
+    def __init__(self, object_list, per_page):
+        super().__init__(object_list, per_page, allow_empty_first_page=False)
+
+
+class NoEmptyPagePagination(PageNumberPagination):
+    """
+    Pagination using NoEmptyPagePaginator
+    """
+
+    django_paginator_class = NoEmptyPagePaginator
+    page_size_query_param = "page_size"

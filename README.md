@@ -1,13 +1,15 @@
 # poet-assistant-drf
+
 Poet Assistant REST api using Django Rest Framework
 
 ## Running
+
 * Run the following commands:
-  * `python3 -m venv env`
-  * `source env/bin/activate`
-  * `pip install -r requirements/dev.txt`
-  * `python manage.py migrate`
-  * `python manage.py runserver`
+    * `python3 -m venv env`
+    * `source env/bin/activate`
+    * `pip install -r requirements/dev.txt`
+    * `python manage.py migrate`
+    * `python manage.py runserver`
 * Open the landing page at http://127.0.0.1:8000
 
 ## REST api documentation
@@ -24,10 +26,7 @@ The app has the following architecture:
 
 The endpoints for definitions and thesaurus entries are implemented using DRF Viewsets and
 serializers and have logic limited to transforming the data as it's stored in the database into
-the required format for the endpoint responses. These two endpoints return the "part of speech"
-of words. The storage of the part of speech is different for definitions and thesaurus entries,
-but a common "fields" module provides a `PartOfSpeechField` that both endpoints use from their
-serializers, to ensure a common part of speech representation in responses for the two endpoints.
+the required format for the endpoint responses.
 
 ### Rhymes
 
@@ -44,3 +43,7 @@ The word of the day (wotd) endpoint has a service layer with some business logic
   [iOS](https://github.com/caarmen/poet-assistant-ios) apps.
 - Exclusion of too common or too rare words, based on a stem table in the database
 
+### Common Api
+
+Logic concerning pagination, search, and serialization, among the different endpoints, is
+centralized in the commonapi package.

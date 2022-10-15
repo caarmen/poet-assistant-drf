@@ -17,22 +17,19 @@
 """
 Wotd serializers
 """
-import dataclasses
 from datetime import datetime
 
 from rest_framework import serializers
+from rest_framework_dataclasses.serializers import DataclassSerializer
 
 from poetassistant.apps.wotd.service import WotdEntry
 
 
 # pylint: disable=abstract-method
-class WotdSerializer(serializers.Serializer):
+class WotdSerializer(DataclassSerializer):
     """
     Wotd serializer
     """
-
-    date = serializers.DateField()
-    word = serializers.CharField()
 
     # pylint: disable=too-few-public-methods
     class Meta:
@@ -40,7 +37,7 @@ class WotdSerializer(serializers.Serializer):
         Wotd serializer metadata
         """
 
-        fields = [f.name for f in dataclasses.fields(WotdEntry)]
+        dataclass = WotdEntry
 
 
 def _default_before():
@@ -56,6 +53,7 @@ class WotdParamsSerializer(serializers.Serializer):
     size = serializers.IntegerField(
         required=False,
         min_value=1,
+        max_value=366,
         default=1,
         help_text="The number of words of the day",
     )

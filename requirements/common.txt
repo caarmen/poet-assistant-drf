@@ -1,4 +1,5 @@
 Django==4.1.2
 django-filter==22.1
 djangorestframework==3.14.0
+djangorestframework-dataclasses==1.1.1
 drf-spectacular==0.24.2

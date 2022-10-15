@@ -17,36 +17,24 @@
 """
 Rhymes view module
 """
-from rest_framework import filters
-from rest_framework.mixins import ListModelMixin
 from rest_framework.viewsets import GenericViewSet
 
+from poetassistant.apps.commonapi.pagination import NoEmptyPagePagination
+from poetassistant.apps.commonapi.search import RequiredSearchListModelMixin
 from poetassistant.apps.rhymes import service
 from poetassistant.apps.rhymes.serializers import RhymesSerializer
 
 
-class WordSearchFilter(filters.SearchFilter):
-    """
-    Filter to search by word
-    """
-
-    search_param = "word"
-
-
-class RhymeSet(ListModelMixin, GenericViewSet):
+class RhymeSet(RequiredSearchListModelMixin, GenericViewSet):
     """
     View set to list rhyme entries
     """
 
+    pagination_class = NoEmptyPagePagination
     serializer_class = RhymesSerializer
-    filter_backends = [WordSearchFilter]
-    search_fields = ["=word"]
-
-    def _get_search_word(self):
-        return self.request.query_params.get(WordSearchFilter.search_param, None)
 
     def _create_queryset(self):
-        return service.create_queryset(self._get_search_word())
+        return service.create_queryset(self.get_search_word())
 
     def get_queryset(self):
         return self._create_queryset()
