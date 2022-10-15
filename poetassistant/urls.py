@@ -30,15 +30,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
+from drf_spectacular.views import SpectacularRedocView, SpectacularAPIView
 from rest_framework import routers
-from rest_framework.schemas import get_schema_view
 
 from poetassistant.apps.definitions.views import DefinitionSet
 from poetassistant.apps.rhymes.views import RhymeSet
 from poetassistant.apps.thesaurus.views import ThesaurusEntrySet
 from poetassistant.apps.wotd.views import WotdSet
-
-schema_view = get_schema_view(title="Poet Assistant API")
 
 router = routers.DefaultRouter()
 router.register(r"rhymes", RhymeSet, "rhymes")
@@ -47,6 +45,7 @@ router.register(r"definitions", DefinitionSet, "definitions")
 router.register(r"wotd", WotdSet, "wotd")
 
 urlpatterns = [
-    path("schema", schema_view),
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 ]
 urlpatterns += router.urls
