@@ -19,7 +19,7 @@ Definitions serializers
 """
 from rest_framework import serializers
 
-from poetassistant.apps.commonapi.partofspeech import PartOfSpeechField
+from poetassistant.apps.commonapi.fields import PartOfSpeechField
 from poetassistant.apps.definitions.models import Dictionary
 
 
