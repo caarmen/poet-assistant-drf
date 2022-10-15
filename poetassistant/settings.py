@@ -28,8 +28,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from pathlib import Path
 
-import django_heroku
-
 from poetassistant.apps.db.dbsettings import DB_DATABASES
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -152,4 +150,3 @@ REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
 }
 
-django_heroku.settings(locals())
