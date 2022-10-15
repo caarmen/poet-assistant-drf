@@ -13,7 +13,7 @@ jobs:
           python-version: '3.9'
       - name: Install dependencies
         run: |
-          python -m pip install -r requirements.txt --upgrade pip
+          python -m pip install -r requirements/dev.txt --upgrade pip
       - name: Run codecheck
         run: bash scripts/codecheck.bash
       - name: Post code check issues to PR
