@@ -20,7 +20,7 @@ Thesaurus serializers
 
 from rest_framework import serializers
 
-from poetassistant.apps.commonapi.partofspeech import PartOfSpeech
+from poetassistant.apps.commonapi.fields import PartOfSpeechField
 from poetassistant.apps.thesaurus.models import ThesaurusEntry
 
 
@@ -41,8 +41,12 @@ class ThesaurusEntrySerializer(serializers.HyperlinkedModelSerializer):
 
     synonyms = CsvListField(child=serializers.CharField())
     antonyms = CsvListField(child=serializers.CharField())
-    part_of_speech = serializers.ChoiceField(
-        choices=PartOfSpeech, read_only=True, source="part_of_speech_enum"
+    part_of_speech = PartOfSpeechField(
+        noun_value=ThesaurusEntry.NOUN,
+        verb_value=ThesaurusEntry.VERB,
+        adjective_value=ThesaurusEntry.ADJECTIVE,
+        adverb_value=ThesaurusEntry.ADVERB,
+        source="word_type",
     )
 
     # pylint: disable=too-few-public-methods

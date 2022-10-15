@@ -1,0 +1,57 @@
+@startuml
+
+package "Poet Assistant REST Api"  {
+  package "definitions" {
+    object definitions.views
+    object definitions.serializers
+    object definitions.models
+  }
+
+  package "thesaurus" {
+    object thesaurus.views
+    object thesaurus.serializers
+    object thesaurus.models
+  }
+
+  package "rhymes" {
+    object rhymes.views
+    object rhymes.serializers
+    object rhymes.service
+    object rhymes.models
+  }
+
+  package "wotd" {
+    object wotd.views
+    object wotd.serializers
+    object wotd.service
+    object wotd.models
+  }
+
+  package "db" <<Database>>{
+  }
+
+  package "commonapi" {
+    object commonapi.fields
+  }
+  
+  definitions.views --> definitions.serializers
+  definitions.serializers --> definitions.models
+  definitions.serializers --> commonapi.fields
+  definitions.models --> db
+  thesaurus.views --> thesaurus.serializers
+  thesaurus.serializers --> thesaurus.models
+  thesaurus.serializers --> commonapi.fields
+  thesaurus.models --> db
+  rhymes.views --> rhymes.serializers
+  rhymes.serializers --> rhymes.models
+  rhymes.views --> rhymes.service
+  rhymes.service --> rhymes.models
+  rhymes.models --> db
+  wotd.views --> wotd.serializers
+  wotd.serializers --> wotd.service
+  wotd.views --> wotd.service
+  wotd.service --> wotd.models
+  wotd.models --> db
+}
+
+@endpuml

@@ -20,7 +20,6 @@ Thesaurus models
 from django.db import models
 
 from poetassistant.apps.db.dbrouter import DbRouter
-from poetassistant.apps.commonapi.partofspeech import PartOfSpeech
 from poetassistant.apps.thesaurus import apps
 
 
@@ -29,25 +28,25 @@ class ThesaurusEntry(models.Model):
     Thesaurus entry model
     """
 
+    ADJECTIVE = "ADJ"
+    ADVERB = "ADV"
+    NOUN = "NOUN"
+    VERB = "VERB"
+
+    # pylint: disable=duplicate-code
+    PART_OF_SPEECH_CHOICES = [
+        (ADJECTIVE, "Adjective"),
+        (ADVERB, "Adverb"),
+        (NOUN, "Noun"),
+        (VERB, "Verb"),
+    ]
     rowid = models.IntegerField(primary_key=True)
     word = models.CharField(max_length=128)
-    word_type = models.CharField(max_length=4)
+    word_type = models.CharField(max_length=4, choices=PART_OF_SPEECH_CHOICES)
     synonyms = models.CharField(max_length=2860)
     antonyms = models.CharField(max_length=128)
 
     objects = models.Manager()
-
-    def part_of_speech_enum(self):
-        """
-        :returns: the part of speech of the word
-        :rtype: PartOfSpeech
-        """
-        return {
-            "ADJ": PartOfSpeech.ADJECTIVE,
-            "ADV": PartOfSpeech.ADVERB,
-            "NOUN": PartOfSpeech.NOUN,
-            "VERB": PartOfSpeech.VERB,
-        }[self.word_type]
 
     # pylint: disable=too-few-public-methods
     class Meta:

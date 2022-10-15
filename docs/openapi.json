@@ -162,22 +162,23 @@
                 "description": ":returns: a response containing the list of words of the day",
                 "parameters": [
                     {
-                        "name": "before",
-                        "required": false,
                         "in": "query",
-                        "description": "Return words of the day prior to and including this date",
+                        "name": "before",
                         "schema": {
-                            "type": "date"
-                        }
+                            "type": "string",
+                            "format": "date"
+                        },
+                        "description": "Return words of the day prior to and including this date"
                     },
                     {
-                        "name": "size",
-                        "required": false,
                         "in": "query",
-                        "description": "The number of words of the day",
+                        "name": "size",
                         "schema": {
-                            "type": "int"
-                        }
+                            "type": "integer",
+                            "minimum": 1,
+                            "default": 1
+                        },
+                        "description": "The number of words of the day"
                     }
                 ],
                 "tags": [
@@ -217,12 +218,7 @@
                 "description": "Definition entry serializer",
                 "properties": {
                     "part_of_speech": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/PartOfSpeechEnum"
-                            }
-                        ],
-                        "readOnly": true
+                        "$ref": "#/components/schemas/PartOfSpeechEnum"
                     },
                     "definition": {
                         "type": "string"
@@ -316,11 +312,11 @@
             },
             "PartOfSpeechEnum": {
                 "enum": [
-                    "PartOfSpeech.NOUN",
-                    "PartOfSpeech.VERB",
-                    "PartOfSpeech.ADJECTIVE",
-                    "PartOfSpeech.ADVERB",
-                    "PartOfSpeech.UNKNOWN"
+                    "noun",
+                    "verb",
+                    "adjective",
+                    "adverb",
+                    "unknown"
                 ],
                 "type": "string"
             },
@@ -352,12 +348,7 @@
                 "description": "Thesaurus entry serialzier",
                 "properties": {
                     "part_of_speech": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/PartOfSpeechEnum"
-                            }
-                        ],
-                        "readOnly": true
+                        "$ref": "#/components/schemas/PartOfSpeechEnum"
                     },
                     "synonyms": {
                         "type": "array",
