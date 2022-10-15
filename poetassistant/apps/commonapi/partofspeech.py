@@ -24,6 +24,7 @@ class PartOfSpeech(str, Enum):
     """
     Part of speech enum
     """
+
     NOUN = "noun"
     VERB = "verb"
     ADJECTIVE = "adjective"

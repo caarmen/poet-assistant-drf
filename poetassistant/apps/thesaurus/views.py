@@ -29,15 +29,20 @@ class WordSearchFilter(filters.SearchFilter):
     """
     Filter to search by word
     """
+
     search_param = "word"
 
 
-class ThesaurusEntrySet(ListModelMixin,
-                        GenericViewSet):
+class ThesaurusEntrySet(ListModelMixin, GenericViewSet):
     """
     View set to list thesaurus entries
     """
-    queryset = ThesaurusEntry.objects.using('poet_assistant').all().order_by('word', 'word_type')
+
+    queryset = (
+        ThesaurusEntry.objects.using("poet_assistant")
+        .all()
+        .order_by("word", "word_type")
+    )
     serializer_class = ThesaurusEntrySerializer
     filter_backends = [WordSearchFilter]
-    search_fields = ['=word']
+    search_fields = ["=word"]

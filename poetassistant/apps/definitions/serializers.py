@@ -27,14 +27,16 @@ class DictionarySerializer(serializers.HyperlinkedModelSerializer):
     """
     Definition entry serializer
     """
-    part_of_speech = serializers.ChoiceField(choices=PartOfSpeech,
-                                             read_only=True,
-                                             source='part_of_speech_enum')
+
+    part_of_speech = serializers.ChoiceField(
+        choices=PartOfSpeech, read_only=True, source="part_of_speech_enum"
+    )
 
     # pylint: disable=too-few-public-methods
     class Meta:
         """
         Definition serializer meta data
         """
+
         model = Dictionary
-        fields = ['part_of_speech', 'definition']
+        fields = ["part_of_speech", "definition"]

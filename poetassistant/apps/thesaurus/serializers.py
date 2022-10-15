@@ -31,23 +31,25 @@ class CsvListField(serializers.ListField):
 
     def get_attribute(self, instance):
         result = super().get_attribute(instance)
-        return [x for x in result.split(',') if x]
+        return [x for x in result.split(",") if x]
 
 
 class ThesaurusEntrySerializer(serializers.HyperlinkedModelSerializer):
     """
     Thesaurus entry serialzier
     """
+
     synonyms = CsvListField(child=serializers.CharField())
     antonyms = CsvListField(child=serializers.CharField())
-    part_of_speech = serializers.ChoiceField(choices=PartOfSpeech,
-                                             read_only=True,
-                                             source='part_of_speech_enum')
+    part_of_speech = serializers.ChoiceField(
+        choices=PartOfSpeech, read_only=True, source="part_of_speech_enum"
+    )
 
     # pylint: disable=too-few-public-methods
     class Meta:
         """
         Thesaurus entry serializer meta data
         """
+
         model = ThesaurusEntry
-        fields = ['part_of_speech', 'synonyms', 'antonyms']
+        fields = ["part_of_speech", "synonyms", "antonyms"]

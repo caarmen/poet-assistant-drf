@@ -51,21 +51,31 @@ _ORDER_BY_TEMPLATE = """
 
 def _create_subquery_template(syllables_type, syllables_sort_key):
     return _SUBQUERY_TEMPLATE.format(
-        **{'syllables_type': syllables_type, 'syllables_sort_key': syllables_sort_key})
+        **{"syllables_type": syllables_type, "syllables_sort_key": syllables_sort_key}
+    )
 
 
-FULL_QUERY_TEMPLATE = _UNION_TEMPLATE.join([
-    _create_subquery_template('stress_syllables', '1'),
-    _create_subquery_template('last_three_syllables', '2'),
-    _create_subquery_template('last_two_syllables', '3'),
-    _create_subquery_template('last_syllable', '4'),
-]) + _ORDER_BY_TEMPLATE
+FULL_QUERY_TEMPLATE = (
+    _UNION_TEMPLATE.join(
+        [
+            _create_subquery_template("stress_syllables", "1"),
+            _create_subquery_template("last_three_syllables", "2"),
+            _create_subquery_template("last_two_syllables", "3"),
+            _create_subquery_template("last_syllable", "4"),
+        ]
+    )
+    + _ORDER_BY_TEMPLATE
+)
 
 
 def create_queryset(word):
     """
     :returns: a rhymes query set for rhymes of the given word
     """
-    return Rhymes.objects.none() if word is None \
-        else Rhymes.objects.using('poet_assistant').raw(
-        FULL_QUERY_TEMPLATE, [word, word, word, word])
+    return (
+        Rhymes.objects.none()
+        if word is None
+        else Rhymes.objects.using("poet_assistant").raw(
+            FULL_QUERY_TEMPLATE, [word, word, word, word]
+        )
+    )

@@ -24,5 +24,6 @@ class CommonApiConfig(AppConfig):
     """
     Common code app config
     """
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'poetassistant.apps.commonapi'
+
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "poetassistant.apps.commonapi"

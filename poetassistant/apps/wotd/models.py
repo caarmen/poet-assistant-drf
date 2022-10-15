@@ -26,6 +26,7 @@ class Stem(models.Model):
     """
     Word stem model
     """
+
     rowid = models.IntegerField(primary_key=True)
     word = models.CharField(max_length=128)
     google_ngram_frequency = models.IntegerField()
@@ -37,5 +38,6 @@ class Stem(models.Model):
         """
         Wotd model meta data
         """
-        db_table = 'stems'
+
+        db_table = "stems"
         app_label = apps.WotdConfig.name

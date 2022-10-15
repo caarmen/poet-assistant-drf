@@ -29,17 +29,18 @@ class WordSearchFilter(filters.SearchFilter):
     """
     Filter to search by word
     """
+
     search_param = "word"
 
 
-class RhymeSet(ListModelMixin,
-               GenericViewSet):
+class RhymeSet(ListModelMixin, GenericViewSet):
     """
     View set to list rhyme entries
     """
+
     serializer_class = RhymesSerializer
     filter_backends = [WordSearchFilter]
-    search_fields = ['=word']
+    search_fields = ["=word"]
 
     def _get_search_word(self):
         return self.request.query_params.get(WordSearchFilter.search_param, None)

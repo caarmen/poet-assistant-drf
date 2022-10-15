@@ -27,6 +27,7 @@ class ThesaurusEntry(models.Model):
     """
     Thesaurus entry model
     """
+
     rowid = models.IntegerField(primary_key=True)
     word = models.CharField(max_length=128)
     word_type = models.CharField(max_length=4)
@@ -41,10 +42,10 @@ class ThesaurusEntry(models.Model):
         :rtype: PartOfSpeech
         """
         return {
-            'ADJ': PartOfSpeech.ADJECTIVE,
-            'ADV': PartOfSpeech.ADVERB,
-            'NOUN': PartOfSpeech.NOUN,
-            'VERB': PartOfSpeech.VERB
+            "ADJ": PartOfSpeech.ADJECTIVE,
+            "ADV": PartOfSpeech.ADVERB,
+            "NOUN": PartOfSpeech.NOUN,
+            "VERB": PartOfSpeech.VERB,
         }[self.word_type]
 
     # pylint: disable=too-few-public-methods
@@ -52,5 +53,6 @@ class ThesaurusEntry(models.Model):
         """
         Thesaurus model meta data
         """
-        db_table = 'thesaurus'
+
+        db_table = "thesaurus"
         app_label = apps.ThesaurusConfig.name

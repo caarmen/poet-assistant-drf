@@ -28,8 +28,9 @@ class Random:
     """
     Random number generator
     """
+
     _seed = 0
-    _multiplier = 0x5deece66d
+    _multiplier = 0x5DEECE66D
 
     def set_seed(self, input_seed):
         """
@@ -57,5 +58,5 @@ class Random:
         return val
 
     def _next(self, bits):
-        self._seed = (self._seed * self._multiplier + 0xb) & ((1 << 48) - 1)
+        self._seed = (self._seed * self._multiplier + 0xB) & ((1 << 48) - 1)
         return self._seed >> (48 - bits)

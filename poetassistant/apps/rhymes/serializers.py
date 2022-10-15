@@ -26,6 +26,7 @@ class RhymesSerializer(serializers.HyperlinkedModelSerializer):
     """
     Rhyme serializer
     """
+
     syllables_type = serializers.SerializerMethodField()
     syllables = serializers.SerializerMethodField()
 
@@ -48,5 +49,6 @@ class RhymesSerializer(serializers.HyperlinkedModelSerializer):
         """
         Rhyme serializer meta data
         """
+
         model = Rhymes
-        fields = ['syllables_type', 'syllables', 'word']
+        fields = ["syllables_type", "syllables", "word"]

@@ -24,5 +24,6 @@ class ThesaurusConfig(AppConfig):
     """
     Thesaurus app config
     """
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'poetassistant.apps.thesaurus'
+
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "poetassistant.apps.thesaurus"

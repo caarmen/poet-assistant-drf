@@ -24,5 +24,6 @@ class WotdConfig(AppConfig):
     """
     Wotd app config
     """
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'poetassistant.apps.wotd'
+
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "poetassistant.apps.wotd"

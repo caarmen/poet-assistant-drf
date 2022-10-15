@@ -21,8 +21,8 @@ import os
 from pathlib import Path
 
 DB_DATABASES = {
-    'poet_assistant': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(Path(__file__).resolve().parent, 'poet_assistant.db')
+    "poet_assistant": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(Path(__file__).resolve().parent, "poet_assistant.db"),
     }
 }

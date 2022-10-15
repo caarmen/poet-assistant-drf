@@ -24,5 +24,6 @@ class DbConfig(AppConfig):
     """
     Poet assistant db app config
     """
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'poetassistant.apps.db'
+
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "poetassistant.apps.db"

@@ -26,6 +26,7 @@ class Rhymes(models.Model):
     """
     Rhyme entry model
     """
+
     rowid = models.IntegerField(primary_key=True)
     word = models.CharField(max_length=34)
     variant_number = models.IntegerField()
@@ -42,6 +43,7 @@ class Rhymes(models.Model):
         """
         Rhyme model meta data
         """
-        db_table = 'word_variants'
+
+        db_table = "word_variants"
         unique_together = ("word", "variant_number")
         app_label = apps.RhymesConfig.name

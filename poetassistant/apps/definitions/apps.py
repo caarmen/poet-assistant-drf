@@ -24,5 +24,6 @@ class DefinitionsConfig(AppConfig):
     """
     Definitions app config
     """
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'poetassistant.apps.definitions'
+
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "poetassistant.apps.definitions"

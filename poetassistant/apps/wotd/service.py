@@ -27,6 +27,7 @@ class WotdEntry:
     """
     Wotd entry data class
     """
+
     word: str
     date: datetime.date
 
@@ -55,10 +56,14 @@ def get_wotd_list(before_date, page_size):
 
 
 def _get_wotd(date_millis):
-    interesting_stem_entries = Stem.objects.using('poet_assistant').exclude(
-        google_ngram_frequency__lte=_MIN_INTERESTING_FREQUENCY).exclude(
-        google_ngram_frequency__gte=_MAX_INTERESTING_FREQUENCY)
-    db_position = _get_db_position_for_date(date_millis, interesting_stem_entries.count())
+    interesting_stem_entries = (
+        Stem.objects.using("poet_assistant")
+        .exclude(google_ngram_frequency__lte=_MIN_INTERESTING_FREQUENCY)
+        .exclude(google_ngram_frequency__gte=_MAX_INTERESTING_FREQUENCY)
+    )
+    db_position = _get_db_position_for_date(
+        date_millis, interesting_stem_entries.count()
+    )
     return interesting_stem_entries[db_position].word
 
 
@@ -70,4 +75,6 @@ def _get_db_position_for_date(date_millis, db_size):
 
 def _get_date_millis(input_date_midnight, days_before):
     target_date_midnight = input_date_midnight - timedelta(days_before)
-    return int(datetime.fromordinal(target_date_midnight.toordinal()).timestamp() * 1000)
+    return int(
+        datetime.fromordinal(target_date_midnight.toordinal()).timestamp() * 1000
+    )

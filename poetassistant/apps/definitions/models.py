@@ -27,6 +27,7 @@ class Dictionary(models.Model):
     """
     Dictionary entry model
     """
+
     rowid = models.IntegerField(primary_key=True)
     word = models.CharField(max_length=128)
     part_of_speech = models.CharField(max_length=1)
@@ -40,10 +41,10 @@ class Dictionary(models.Model):
         :rtype: PartOfSpeech
         """
         return {
-            'a': PartOfSpeech.ADJECTIVE,
-            'r': PartOfSpeech.ADVERB,
-            'n': PartOfSpeech.NOUN,
-            'v': PartOfSpeech.VERB
+            "a": PartOfSpeech.ADJECTIVE,
+            "r": PartOfSpeech.ADVERB,
+            "n": PartOfSpeech.NOUN,
+            "v": PartOfSpeech.VERB,
         }[self.part_of_speech]
 
     # pylint: disable=too-few-public-methods
@@ -51,6 +52,7 @@ class Dictionary(models.Model):
         """
         Definition model meta data
         """
-        db_table = 'dictionary'
+
+        db_table = "dictionary"
         unique_together = ("word", "definition")
         app_label = apps.DefinitionsConfig.name

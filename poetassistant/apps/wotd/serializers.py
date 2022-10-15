@@ -28,6 +28,7 @@ class WotdSerializer(serializers.Serializer):
     """
     Wotd serializer
     """
+
     date = serializers.DateField()
     word = serializers.CharField()
 
@@ -36,6 +37,7 @@ class WotdSerializer(serializers.Serializer):
         """
         Wotd serializer metadata
         """
+
         fields = [f.name for f in dataclasses.fields(WotdEntry)]
 
     def update(self, instance, validated_data):

@@ -24,5 +24,6 @@ class RhymesConfig(AppConfig):
     """
     Rhymes app config
     """
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'poetassistant.apps.rhymes'
+
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "poetassistant.apps.rhymes"

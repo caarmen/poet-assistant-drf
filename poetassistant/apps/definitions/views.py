@@ -29,6 +29,7 @@ class WordSearchFilter(filters.SearchFilter):
     """
     Filter to search by word
     """
+
     search_param = "word"
 
 
@@ -36,9 +37,12 @@ class DefinitionSet(ListModelMixin, GenericViewSet):
     """
     View set to list definition entries
     """
-    queryset = Dictionary.objects.using('poet_assistant') \
-        .all() \
-        .order_by('word', 'part_of_speech', 'definition')
+
+    queryset = (
+        Dictionary.objects.using("poet_assistant")
+        .all()
+        .order_by("word", "part_of_speech", "definition")
+    )
     serializer_class = DictionarySerializer
     filter_backends = [WordSearchFilter]
-    search_fields = ['=word']
+    search_fields = ["=word"]
