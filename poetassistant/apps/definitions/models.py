@@ -20,7 +20,6 @@ Definitions models
 from django.db import models
 
 from poetassistant.apps.db.dbrouter import DbRouter
-from poetassistant.apps.commonapi.partofspeech import PartOfSpeech
 from poetassistant.apps.definitions import apps
 
 
@@ -29,24 +28,25 @@ class Dictionary(models.Model):
     Dictionary entry model
     """
 
+    ADJECTIVE = "a"
+    ADVERB = "r"
+    NOUN = "n"
+    VERB = "v"
+
+    # pylint: disable=duplicate-code
+    PART_OF_SPEECH_CHOICES = [
+        (ADJECTIVE, "Adjective"),
+        (ADVERB, "Adverb"),
+        (NOUN, "Noun"),
+        (VERB, "Verb"),
+    ]
+
     rowid = models.IntegerField(primary_key=True)
     word = models.CharField(max_length=128)
-    part_of_speech = models.CharField(max_length=1)
+    part_of_speech = models.CharField(max_length=1, choices=PART_OF_SPEECH_CHOICES)
     definition = models.TextField()
 
     objects = models.Manager()
-
-    def part_of_speech_enum(self):
-        """
-        :returns: the part of speech of the word
-        :rtype: PartOfSpeech
-        """
-        return {
-            "a": PartOfSpeech.ADJECTIVE,
-            "r": PartOfSpeech.ADVERB,
-            "n": PartOfSpeech.NOUN,
-            "v": PartOfSpeech.VERB,
-        }[self.part_of_speech]
 
     # pylint: disable=too-few-public-methods
     class Meta:

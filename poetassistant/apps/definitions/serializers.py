@@ -19,20 +19,23 @@ Definitions serializers
 """
 from rest_framework import serializers
 
-from poetassistant.apps.commonapi.partofspeech import PartOfSpeech
+from poetassistant.apps.commonapi.partofspeech import PartOfSpeechField
 from poetassistant.apps.definitions.models import Dictionary
 
 
+# pylint: disable=too-few-public-methods
 class DictionarySerializer(serializers.HyperlinkedModelSerializer):
     """
     Definition entry serializer
     """
 
-    part_of_speech = serializers.ChoiceField(
-        choices=PartOfSpeech, read_only=True, source="part_of_speech_enum"
+    part_of_speech = PartOfSpeechField(
+        noun_value=Dictionary.NOUN,
+        verb_value=Dictionary.VERB,
+        adjective_value=Dictionary.ADJECTIVE,
+        adverb_value=Dictionary.ADVERB,
     )
 
-    # pylint: disable=too-few-public-methods
     class Meta:
         """
         Definition serializer meta data

@@ -19,6 +19,8 @@ Part of speech enum
 
 from enum import Enum
 
+from rest_framework.fields import ChoiceField
+
 
 class PartOfSpeech(str, Enum):
     """
@@ -30,3 +32,32 @@ class PartOfSpeech(str, Enum):
     ADJECTIVE = "adjective"
     ADVERB = "adverb"
     UNKNOWN = "unknown"
+
+
+# pylint: disable=abstract-method
+class PartOfSpeechField(ChoiceField):
+    """
+    Serialize a part of speech field from the model to the common PartOfSpeech enum
+    """
+
+    def __init__(
+        self,
+        noun_value: str,
+        verb_value: str,
+        adjective_value: str,
+        adverb_value: str,
+        **kwargs,
+    ):
+        super().__init__(choices=[e.value for e in PartOfSpeech], **kwargs)
+        self._model_to_api_part_of_speech = {
+            noun_value: PartOfSpeech.NOUN,
+            verb_value: PartOfSpeech.VERB,
+            adjective_value: PartOfSpeech.ADJECTIVE,
+            adverb_value: PartOfSpeech.ADVERB,
+        }
+
+    def to_representation(self, value) -> PartOfSpeech:
+        """
+        Map the part of speech from the model to the common api enum
+        """
+        return self._model_to_api_part_of_speech.get(value, PartOfSpeech.UNKNOWN)
