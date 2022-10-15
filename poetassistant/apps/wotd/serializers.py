@@ -18,12 +18,14 @@
 Wotd serializers
 """
 import dataclasses
+from datetime import datetime
 
 from rest_framework import serializers
 
 from poetassistant.apps.wotd.service import WotdEntry
 
 
+# pylint: disable=abstract-method
 class WotdSerializer(serializers.Serializer):
     """
     Wotd serializer
@@ -40,8 +42,25 @@ class WotdSerializer(serializers.Serializer):
 
         fields = [f.name for f in dataclasses.fields(WotdEntry)]
 
-    def update(self, instance, validated_data):
-        pass
 
-    def create(self, validated_data):
-        pass
+def _default_before():
+    return datetime.utcnow().date()
+
+
+# pylint: disable=abstract-method
+class WotdParamsSerializer(serializers.Serializer):
+    """
+    Validation of wotd query params
+    """
+
+    size = serializers.IntegerField(
+        required=False,
+        min_value=1,
+        default=1,
+        help_text="The number of words of the day",
+    )
+    before = serializers.DateField(
+        required=False,
+        default=_default_before,
+        help_text="Return words of the day prior to and including this date",
+    )

@@ -17,60 +17,25 @@
 """
 Wotd view module
 """
-from datetime import datetime
-
-from django.utils.encoding import force_str
-from rest_framework.exceptions import ValidationError
-from rest_framework.filters import BaseFilterBackend
+from drf_spectacular.utils import extend_schema
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
 from poetassistant.apps.wotd import service
-from poetassistant.apps.wotd.serializers import WotdSerializer
-
-
-class WotdFilterBackend(BaseFilterBackend):
-    """
-    Defines search filters for the wotd
-    """
-
-    def get_schema_operation_parameters(self, view):
-        return [
-            {
-                "name": "size",
-                "required": False,
-                "in": "query",
-                "description": force_str("The number of words of the day"),
-                "schema": {"type": "int"},
-            },
-            {
-                "name": "before",
-                "required": False,
-                "in": "query",
-                "description": force_str(
-                    "Return words of the day prior to and including this date"
-                ),
-                "schema": {"type": "date"},
-            },
-        ]
-
-    def filter_queryset(self, request, queryset, view):
-        return queryset
+from poetassistant.apps.wotd.serializers import WotdSerializer, WotdParamsSerializer
 
 
 class WotdSet(GenericViewSet):
     """
-    View set to list rhyme entries
+    View set to list words of the day
     """
 
     pagination_class = None
-    filter_backends = [WotdFilterBackend]
     serializer_class = WotdSerializer
-
-    _default_page_size_value = 1
 
     # pylint: disable=unused-argument
     # noinspection PyUnusedLocal
+    @extend_schema(parameters=[WotdParamsSerializer])
     def list(self, request):
         """
         :returns: a response containing the list of words of the day
@@ -80,28 +45,9 @@ class WotdSet(GenericViewSet):
         return Response(serializer.data)
 
     def get_queryset(self):
-        return service.get_wotd_list(self._get_before(), self._get_page_size())
-
-    @staticmethod
-    def _default_before_value():
-        return datetime.utcnow().date()
-
-    def _get_page_size(self):
-        param_size = self.request.query_params.get("size", None)
-        try:
-            return (
-                self._default_page_size_value if param_size is None else int(param_size)
-            )
-        except ValueError as error:
-            raise ValidationError(f"Invalid value {param_size} for size") from error
-
-    def _get_before(self):
-        param_before = self.request.query_params.get("before", None)
-        try:
-            return (
-                self._default_before_value()
-                if param_before is None
-                else datetime.fromisoformat(param_before).date()
-            )
-        except ValueError as error:
-            raise ValidationError(f"Invalid value {param_before} for before") from error
+        filter_serializer = WotdParamsSerializer(data=self.request.query_params)
+        filter_serializer.is_valid(raise_exception=True)
+        return service.get_wotd_list(
+            before_date=filter_serializer.validated_data["before"],
+            page_size=filter_serializer.validated_data["size"],
+        )
