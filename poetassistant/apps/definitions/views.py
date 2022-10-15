@@ -25,24 +25,13 @@ from poetassistant.apps.definitions.models import Dictionary
 from poetassistant.apps.definitions.serializers import DictionarySerializer
 
 
-class WordSearchFilter(filters.SearchFilter):
-    """
-    Filter to search by word
-    """
-
-    search_param = "word"
-
-
 class DefinitionSet(ListModelMixin, GenericViewSet):
     """
     View set to list definition entries
     """
 
-    queryset = (
-        Dictionary.objects.using("poet_assistant")
-        .all()
-        .order_by("word", "part_of_speech", "definition")
-    )
+    queryset = Dictionary.objects.using("poet_assistant").all()
     serializer_class = DictionarySerializer
-    filter_backends = [WordSearchFilter]
+    filter_backends = [filters.SearchFilter]
     search_fields = ["=word"]
+    ordering = ["word", "part_of_speech", "definition"]

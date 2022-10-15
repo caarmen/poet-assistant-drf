@@ -25,24 +25,13 @@ from poetassistant.apps.thesaurus.models import ThesaurusEntry
 from poetassistant.apps.thesaurus.serializers import ThesaurusEntrySerializer
 
 
-class WordSearchFilter(filters.SearchFilter):
-    """
-    Filter to search by word
-    """
-
-    search_param = "word"
-
-
 class ThesaurusEntrySet(ListModelMixin, GenericViewSet):
     """
     View set to list thesaurus entries
     """
 
-    queryset = (
-        ThesaurusEntry.objects.using("poet_assistant")
-        .all()
-        .order_by("word", "word_type")
-    )
+    queryset = ThesaurusEntry.objects.using("poet_assistant").all()
     serializer_class = ThesaurusEntrySerializer
-    filter_backends = [WordSearchFilter]
+    filter_backends = [filters.SearchFilter]
     search_fields = ["=word"]
+    ordering = ["word", "word_type"]
