@@ -382,10 +382,16 @@
                         "$ref": "#/components/schemas/PartOfSpeechEnum"
                     },
                     "synonyms": {
-                        "type": "string"
+                        "type": "array",
+                        "items": {
+                            "type": "str"
+                        }
                     },
                     "antonyms": {
-                        "type": "string"
+                        "type": "array",
+                        "items": {
+                            "type": "str"
+                        }
                     }
                 },
                 "required": [

@@ -17,19 +17,22 @@
 """
 Thesaurus serializers
 """
+from typing import List
 
+from drf_spectacular.utils import extend_schema_field
 from rest_framework import serializers
 
 from poetassistant.apps.commonapi.fields import PartOfSpeechField
 from poetassistant.apps.thesaurus.models import ThesaurusEntry
 
 
+@extend_schema_field(field={"type": "array", "items": {"type": "str"}})
 class CsvField(serializers.Field):
     """
     Serializer which convets a comma-separated string into a list of strings
     """
 
-    def to_representation(self, value):
+    def to_representation(self, value) -> List[str]:
         return [x for x in value.split(",") if x]
 
     def to_internal_value(self, data):
@@ -42,6 +45,7 @@ class ThesaurusEntrySerializer(serializers.HyperlinkedModelSerializer):
     """
 
     synonyms = CsvField()
+
     antonyms = CsvField()
     part_of_speech = PartOfSpeechField(
         noun_value=ThesaurusEntry.NOUN,
