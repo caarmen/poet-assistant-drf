@@ -21,13 +21,23 @@
                         }
                     },
                     {
-                        "name": "word",
+                        "name": "page_size",
                         "required": false,
                         "in": "query",
-                        "description": "A search term.",
+                        "description": "Number of results to return per page.",
                         "schema": {
-                            "type": "string"
+                            "type": "integer"
                         }
+                    },
+                    {
+                        "in": "query",
+                        "name": "word",
+                        "schema": {
+                            "type": "string",
+                            "minLength": 1
+                        },
+                        "description": "The word to look up",
+                        "required": true
                     }
                 ],
                 "tags": [
@@ -71,13 +81,23 @@
                         }
                     },
                     {
-                        "name": "word",
+                        "name": "page_size",
                         "required": false,
                         "in": "query",
-                        "description": "A search term.",
+                        "description": "Number of results to return per page.",
                         "schema": {
-                            "type": "string"
+                            "type": "integer"
                         }
+                    },
+                    {
+                        "in": "query",
+                        "name": "word",
+                        "schema": {
+                            "type": "string",
+                            "minLength": 1
+                        },
+                        "description": "The word to look up",
+                        "required": true
                     }
                 ],
                 "tags": [
@@ -121,13 +141,23 @@
                         }
                     },
                     {
-                        "name": "word",
+                        "name": "page_size",
                         "required": false,
                         "in": "query",
-                        "description": "A search term.",
+                        "description": "Number of results to return per page.",
                         "schema": {
-                            "type": "string"
+                            "type": "integer"
                         }
+                    },
+                    {
+                        "in": "query",
+                        "name": "word",
+                        "schema": {
+                            "type": "string",
+                            "minLength": 1
+                        },
+                        "description": "The word to look up",
+                        "required": true
                     }
                 ],
                 "tags": [
@@ -175,6 +205,7 @@
                         "name": "size",
                         "schema": {
                             "type": "integer",
+                            "maximum": 366,
                             "minimum": 1,
                             "default": 1
                         },
@@ -200,7 +231,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Wotd"
+                                        "$ref": "#/components/schemas/WotdEntry"
                                     }
                                 }
                             }
@@ -351,16 +382,10 @@
                         "$ref": "#/components/schemas/PartOfSpeechEnum"
                     },
                     "synonyms": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
+                        "type": "string"
                     },
                     "antonyms": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
+                        "type": "string"
                     }
                 },
                 "required": [
@@ -369,16 +394,16 @@
                     "synonyms"
                 ]
             },
-            "Wotd": {
+            "WotdEntry": {
                 "type": "object",
                 "description": "Wotd serializer",
                 "properties": {
+                    "word": {
+                        "type": "string"
+                    },
                     "date": {
                         "type": "string",
                         "format": "date"
-                    },
-                    "word": {
-                        "type": "string"
                     }
                 },
                 "required": [

@@ -1,3 +1,5 @@
+# Copyright (c) 2022 - present Carmen Alvarez
+#
 # This file is part of Poet Assistant.
 #
 # Poet Assistant is free software: you can redistribute it and/or modify
@@ -15,8 +17,8 @@
 """
 Wotd service module
 """
+import datetime
 from dataclasses import dataclass
-from datetime import datetime, timedelta
 
 from poetassistant.apps.wotd.models import Stem
 from poetassistant.apps.wotd.random import Random
@@ -50,7 +52,7 @@ def get_wotd_list(before_date, page_size):
     for date_position in range(0, page_size):
         date_millis = _get_date_millis(before_date, date_position)
         word = _get_wotd(date_millis)
-        date = datetime.fromtimestamp(date_millis / 1000).date().isoformat()
+        date = datetime.datetime.fromtimestamp(date_millis / 1000).date()
         result.append(WotdEntry(word=word, date=date))
     return result
 
@@ -72,7 +74,8 @@ def _get_db_position_for_date(date_millis, db_size):
 
 
 def _get_date_millis(input_date_midnight, days_before):
-    target_date_midnight = input_date_midnight - timedelta(days_before)
+    target_date_midnight = input_date_midnight - datetime.timedelta(days_before)
     return int(
-        datetime.fromordinal(target_date_midnight.toordinal()).timestamp() * 1000
+        datetime.datetime.fromordinal(target_date_midnight.toordinal()).timestamp()
+        * 1000
     )

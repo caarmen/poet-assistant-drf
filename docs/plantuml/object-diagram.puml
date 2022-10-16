@@ -32,19 +32,22 @@ package "Poet Assistant REST Api"  {
 
   package "commonapi" {
     object commonapi.fields
+    object commonapi.pagination
+    object commonapi.search
   }
   
   definitions.views --> definitions.serializers
+  definitions --> commonapi
   definitions.serializers --> definitions.models
-  definitions.serializers --> commonapi.fields
   definitions.models --> db
   thesaurus.views --> thesaurus.serializers
   thesaurus.serializers --> thesaurus.models
-  thesaurus.serializers --> commonapi.fields
+  thesaurus --> commonapi
   thesaurus.models --> db
   rhymes.views --> rhymes.serializers
   rhymes.serializers --> rhymes.models
   rhymes.views --> rhymes.service
+  rhymes --> commonapi
   rhymes.service --> rhymes.models
   rhymes.models --> db
   wotd.views --> wotd.serializers

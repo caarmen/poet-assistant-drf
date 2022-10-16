@@ -13,7 +13,7 @@ jobs:
           python-version: '3.9'
       - name: Install dependencies
         run: |
-          python -m pip install -r requirements/dev.txt --upgrade pip
+          python -m pip install -r requirements/test.txt --upgrade pip
       - name: Run codecheck
         run: bash scripts/codecheck.bash
       - name: Post code check issues to PR
@@ -21,9 +21,16 @@ jobs:
         uses: jwgmeligmeyling/checkstyle-github-action@master
         with:
           path: reports/pylint.xml
+      - name: Run tests
+        run: bash scripts/run_tests.sh
+      - name: Publish test report
+        uses: mikepenz/action-junit-report@v3
+        if: always()
+        with:
+          report_paths: 'reports/junit.xml'
       - name: Archive codecheck reports
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: pylint
+          name: reports
           path: reports

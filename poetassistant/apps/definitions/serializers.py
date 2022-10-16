@@ -36,6 +36,10 @@ class DictionarySerializer(serializers.HyperlinkedModelSerializer):
         adverb_value=Dictionary.ADVERB,
     )
 
+    def to_internal_value(self, data):
+        result = super().to_internal_value(data)
+        return Dictionary(**result)
+
     class Meta:
         """
         Definition serializer meta data

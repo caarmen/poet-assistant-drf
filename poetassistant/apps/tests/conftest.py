@@ -15,21 +15,17 @@
 # You should have received a copy of the GNU General Public License
 # along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
 """
-Definitions view module
+Test configuration
 """
-from rest_framework.viewsets import GenericViewSet
+import pytest
 
-from poetassistant.apps.commonapi.pagination import NoEmptyPagePagination
-from poetassistant.apps.commonapi.search import RequiredSearchListModelMixin
-from poetassistant.apps.definitions.models import Dictionary
-from poetassistant.apps.definitions.serializers import DictionarySerializer
+from poetassistant import settings
+from poetassistant.apps.db.dbsettings import DB_DATABASES
 
 
-class DefinitionSet(RequiredSearchListModelMixin, GenericViewSet):
+@pytest.fixture(scope="session")
+def django_db_setup():
     """
-    View set to list definition entries
+    Allow access to our embedded database for tests
     """
-
-    queryset = Dictionary.objects.all().order_by("part_of_speech", "definition")
-    pagination_class = NoEmptyPagePagination
-    serializer_class = DictionarySerializer
+    settings.DATABASES.update(DB_DATABASES)

@@ -17,21 +17,19 @@
 """
 Thesaurus views module
 """
-from rest_framework import filters
-from rest_framework.mixins import ListModelMixin
 from rest_framework.viewsets import GenericViewSet
 
+from poetassistant.apps.commonapi.pagination import NoEmptyPagePagination
+from poetassistant.apps.commonapi.search import RequiredSearchListModelMixin
 from poetassistant.apps.thesaurus.models import ThesaurusEntry
 from poetassistant.apps.thesaurus.serializers import ThesaurusEntrySerializer
 
 
-class ThesaurusEntrySet(ListModelMixin, GenericViewSet):
+class ThesaurusEntrySet(RequiredSearchListModelMixin, GenericViewSet):
     """
     View set to list thesaurus entries
     """
 
-    queryset = ThesaurusEntry.objects.all()
+    queryset = ThesaurusEntry.objects.all().order_by("word_type")
     serializer_class = ThesaurusEntrySerializer
-    filter_backends = [filters.SearchFilter]
-    search_fields = ["=word"]
-    ordering = ["word", "word_type"]
+    pagination_class = NoEmptyPagePagination

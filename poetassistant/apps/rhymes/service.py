@@ -1,3 +1,5 @@
+# Copyright (c) 2022 - present Carmen Alvarez
+#
 # This file is part of Poet Assistant.
 #
 # Poet Assistant is free software: you can redistribute it and/or modify
