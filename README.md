@@ -3,7 +3,7 @@
 Poet Assistant REST api using Django Rest Framework
 
 [![GitHub license][license-image]][license-url]
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/caarmen/poet-assistant-drf/codecheck.yml?branch=main)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/caarmen/poet-assistant-drf/codecheck.yml?branch=main)](https://github.com/caarmen/poet-assistant-drf/actions/workflows/codecheck.yml?query=branch%3Amain)
 
 
 [license-image]: https://img.shields.io/github/license/caarmen/poet-assistant-drf
