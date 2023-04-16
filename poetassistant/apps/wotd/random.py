@@ -16,7 +16,8 @@
 # along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
 """
 Port the java implementation of Random.nextInt() using a seed.
-This is so we have the same words of the day across the different platforms (android, iOS, ...)
+This is so we have the same words of the day across the different platforms
+(android, iOS, ...)
 We also ported the java version to the iOS app:
 https://github.com/caarmen/poet-assistant-ios/blob/master/PoetAssistantLexiconsFramework/src/wotd/Random.swift
 One of the java implementations (for Android):

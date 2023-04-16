@@ -20,7 +20,7 @@ jobs:
         if: always()
         uses: jwgmeligmeyling/checkstyle-github-action@master
         with:
-          path: reports/pylint.xml
+          path: reports/*-checkstyle.xml
       - name: Run tests
         run: bash scripts/run_tests.sh
       - name: Publish test report

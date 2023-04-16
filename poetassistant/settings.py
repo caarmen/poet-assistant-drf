@@ -112,7 +112,9 @@ DATABASE_ROUTERS = [f"{DbRouter.__module__}.{DbRouter.__name__}"]
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        # Disable E501 line too long. Black doesn't let us reformat this line.
+        # pylint: disable=C0301
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",  # noqa: E501
     },
     {
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
