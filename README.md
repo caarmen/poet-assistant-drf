@@ -2,6 +2,13 @@
 
 Poet Assistant REST api using Django Rest Framework
 
+[![GitHub license][license-image]][license-url]
+
+
+[license-image]: https://img.shields.io/github/license/caarmen/poet-assistant-drf
+[license-url]: https://raw.githubusercontent.com/caarmen/pylint-json2checkstyle/main/LICENSE
+
+
 ## Running
 
 * Run the following commands:
