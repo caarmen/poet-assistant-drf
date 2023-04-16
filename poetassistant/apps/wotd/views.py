@@ -14,9 +14,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Poet Assistant.  If not, see <http://www.gnu.org/licenses/>.
-"""
-Wotd view module
-"""
 from drf_spectacular.utils import extend_schema
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
@@ -32,6 +29,9 @@ class WotdSet(GenericViewSet):
 
     pagination_class = None
     serializer_class = WotdSerializer
+
+    def _unused_function(self, request):
+        print("hello")
 
     # pylint: disable=unused-argument
     # noinspection PyUnusedLocal
